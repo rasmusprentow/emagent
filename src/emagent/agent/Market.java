@@ -1,6 +1,6 @@
 package emagent.agent;
 
-import jadex.rules.parser.conditions.javagrammar.Suffix;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
