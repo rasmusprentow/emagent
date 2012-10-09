@@ -10,8 +10,17 @@ public class FirstPriceSealedBidOneShotMarket extends Market {
 
 	@Override
 	protected Collection<IAuctionResult> bidRound(ArrayList<IAuction> auctions) {
-		// TODO Auto-generated method stub
-		return null;
+		Collection<IAuctionResult> results = new ArrayList<IAuctionResult>();
+		for(IAuction auction : auctions)
+		{
+			for(IBrp brp : auctionListeners)
+			{
+				brp.notifyAuctionAvailable(auction);
+			}
+			auction.close();
+			results.add(auction.getResult());
+		}
+		return results;
 	}
 
 }

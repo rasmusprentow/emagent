@@ -5,7 +5,7 @@ import java.util.Stack;
 import emagent.agent.IBrp;
 
 public interface IAuction {
-	public boolean add(IBid e);
+	public boolean add(IBid e) throws Exception;
 
 	public AuctionStatus getStatus();
 
@@ -18,4 +18,8 @@ public interface IAuction {
 	public IBrp getSeller();
 
 	public Stack<IBid> getBids();
+
+	public void close();
+
+	public IAuctionResult getResult();
 }
