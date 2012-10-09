@@ -25,7 +25,7 @@ public abstract class Market implements IMarket {
 	}
 
 	@Override
-	public void notifyTurnOver(int newTick) {
+	public void notifyTurnOver(int newTick) throws Exception {
 
 		shuffle();
 		ArrayList<IAuction> auctions = postRound();
@@ -56,14 +56,19 @@ public abstract class Market implements IMarket {
 		Collection<IAuction> curPost;
 		for(IBrp brp : auctionListeners)
 		{
-			curPost = brp.notifyPostRound();
+			curPost = brp.notifyPostRound(getAuctionType());
 			auctions.addAll(curPost);
 		}
-		
+		for(IAuction a : auctions)
+		{
+			a.setStatus(AuctionStatus.POSTED);
+		}
 		return auctions;
 	}
 	
-	protected abstract Collection<IAuctionResult> bidRound(ArrayList<IAuction> auctions);
+	protected abstract AuctionType getAuctionType();
+
+	protected abstract Collection<IAuctionResult> bidRound(ArrayList<IAuction> auctions) throws Exception;
 	
 	protected void handoutRound(Collection<IAuctionResult> results)
 	{

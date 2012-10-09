@@ -1,7 +1,11 @@
 package emagent.environment;
 
+import emagent.ui.Writer;
+import emagent.ui.TickListener;
+
 public interface IEnvironment {
-	public void start();
+	
 	public int getTime();
-	public void turnOver();
+	public void turnOver() throws Exception;
+	void start(TickListener tickListener) throws Exception;
 }
