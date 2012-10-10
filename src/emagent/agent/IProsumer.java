@@ -1,6 +1,6 @@
 package emagent.agent;
 
-public interface IProsumer {
+public interface IProsumer extends IAgent{
 
 	/**
 	 * 

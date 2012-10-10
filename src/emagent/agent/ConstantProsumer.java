@@ -1,6 +1,6 @@
 package emagent.agent;
 
-public class ConstantProsumer implements IProsumer {
+public class ConstantProsumer extends AbstractProsumer implements IProsumer {
 
 	protected int consumation;
 
@@ -13,6 +13,12 @@ public class ConstantProsumer implements IProsumer {
 	public int getTotalConsumption() {
 		
 		return consumation;
+	}
+
+	@Override
+	public void notifyTick(int time) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
