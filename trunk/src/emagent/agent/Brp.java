@@ -96,7 +96,7 @@ public class Brp extends AbstractAgent implements IBrp{
 		return electricalBalance - getTotalConsumption();
 	}
 	
-	protected int getTotalConsumption(){
+	public int getTotalConsumption(){
 		int total = 0;
 		for (IProsumer p : prosumers)
 		{
@@ -104,6 +104,8 @@ public class Brp extends AbstractAgent implements IBrp{
 		}
 		return total;
 	}
+
+	
 
 	
 	

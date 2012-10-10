@@ -18,7 +18,7 @@ public class ConstantProsumer extends AbstractProsumer implements IProsumer {
 	@Override
 	public void notifyTick(int time) throws Exception {
 		// TODO Auto-generated method stub
-		
+		update();
 	}
 
 }

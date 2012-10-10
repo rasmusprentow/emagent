@@ -17,24 +17,24 @@ public class DrawableBrp extends DrawableAgent {
 	private static final long serialVersionUID = -3757231984750674472L;
 	private IBrp brp;
 	private Label money;
+	private Label consumation;
 	private Label electricity;
-	
 	public DrawableBrp(IBrp brp) {
 		super();
 		//
-		setPreferredSize(new Dimension(200,100));
-		setLayout(new GridLayout(3,1));
+		setPreferredSize(new Dimension(99,99));
+		setLayout(new GridLayout(4,1));
 		setVisible(true);
-		setBackground(Color.YELLOW);
+		setBackground(Color.GREEN);
 		
 		this.brp = brp;
 		brp.subscribeToUpdates(this);
 		money = new Label("Money           ");
 		electricity = new Label("electricity              ");
-		money.setSize(100, money.getHeight());
-		electricity.setSize(100,electricity.getHeight());
+		consumation = new Label("consumation              ");
 		this.add(money);
 		this.add(electricity);
+		this.add(consumation);
 	}
 
 	@Override
@@ -42,6 +42,7 @@ public class DrawableBrp extends DrawableAgent {
 
 		money.setText("Cash: " + brp.getCurrentMonetaryBalance());
 		electricity.setText("Electricity: " +brp.getCurrentElectricalBalance());
+		consumation.setText("Cons.: " + brp.getTotalConsumption());
 	}
 	
 	

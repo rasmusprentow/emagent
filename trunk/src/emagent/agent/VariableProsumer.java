@@ -12,6 +12,7 @@ public class VariableProsumer extends AbstractProsumer implements IProsumer {
 	@Override
 	public void notifyTick(int time) throws Exception {
 		this.time = time;
+		update();
 	}
 
 	@Override

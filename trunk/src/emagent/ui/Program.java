@@ -20,7 +20,7 @@ public class Program {
 	      window.pack();  // Set size of window to preferred size of its contents.
 	      window.setResizable(false);  // User can't change the window's size.
 	      window.setLocation(200,400);
-	      window.setSize(800, 800);
+	      window.setSize(1200, 800);
 	      window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 	      window.setVisible(true);
 	      
