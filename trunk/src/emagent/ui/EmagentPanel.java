@@ -31,13 +31,16 @@ public class EmagentPanel extends JPanel implements TickListener{
 	{
 		this.setLayout( new GridLayout(1,2) );
 		leftSide = new JPanel();
+		leftSide.setLayout(new GridLayout(2,1));
+		leftSide.setSize(this.getWidth()/2, this.getWidth());
 		this.add(leftSide);
 		rightSide = new JPanel();
+		
 		rightSide.setLayout(new BorderLayout());
 		this.add(rightSide);
 	//	leftSide.setLayout(new GridLayout(1,1))
 		
-		leftSide.add(new Label("Market"));
+		
 		rightSide.add(new Label("BRPs"), BorderLayout.NORTH);
 		
 		totalConsumptionLabel = new Label(TOTAL_CONSUMATION_STRING + "0 MW");
