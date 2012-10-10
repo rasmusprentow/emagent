@@ -16,5 +16,6 @@ public interface IBrp extends IAgent, EventListener {
 	public boolean addProsumer(IProsumer e);
 
 	public boolean addAllProsumers(Collection<? extends IProsumer> c);
+	public int getTotalConsumption();
 
 }

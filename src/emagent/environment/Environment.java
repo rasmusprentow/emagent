@@ -60,7 +60,7 @@ public class Environment implements IEnvironment {
 	public IMarket getMarket() {
 		return market;
 	}
-
+	
 	@Override
 	public void start(TickListener tickListener) throws Exception {
 		tickNotifiers.add(tickListener);
@@ -68,14 +68,17 @@ public class Environment implements IEnvironment {
 		
 		
 		
-		IBrp brp1 = new Brp(10);
-		IBrp brp2 = new Brp(10);
+		IBrp brp1 = new Brp(100);
+		IBrp brp2 = new Brp(100);
+		IBrp brp3 = new Brp(-100);
 		
 		market.subscribeToAuctions(brp1);
 		market.subscribeToAuctions(brp2);
-
+		market.subscribeToAuctions(brp3);
+		
 		brps.add(brp1);
 		brps.add(brp2);
+		brps.add(brp3);
 		
 		I2IFunction func1 = new I2IFunction()
 		{
@@ -86,18 +89,31 @@ public class Environment implements IEnvironment {
 			}
 		};
 		
-		IProsumer pro3 = new VariableProsumer(func1);
+		I2IFunction func2 = new I2IFunction()
+		{
+			@Override
+			public int map(int arg) {
+				return (int) (-0.01 * arg);
+				
+			}
+		};
+		
+		
+		
 		IProsumer pro1 = new ConstantProsumer(10);
 		IProsumer pro2 = new ConstantProsumer(-10);
+		IProsumer pro3 = new VariableProsumer(func1);
+		IProsumer pro4 = new VariableProsumer(func2);
 		
 		prosumers.add(pro1);
 		prosumers.add(pro2);
 		prosumers.add(pro3);
+		prosumers.add(pro4);
 		
 		brp1.addProsumer(pro1);
 		brp2.addProsumer(pro2);
 		brp1.addProsumer(pro3);
-		
+		brp3.addProsumer(pro4);
 		
 		
 		

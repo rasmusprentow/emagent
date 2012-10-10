@@ -15,14 +15,14 @@ abstract public class DrawableAgent extends JPanel {
 
 	public DrawableAgent()
 	{
-	
+	 super();
 
 		this.setForeground(Color.BLACK);
 		this.add(new Label(this.toString()));
 	}
 	
 	public abstract void update();
-	
+		
 
 }
 
