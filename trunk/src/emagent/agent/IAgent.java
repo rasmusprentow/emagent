@@ -1,5 +1,8 @@
 package emagent.agent;
 
-public interface IAgent {
-	public void notifyTurnOver(int newTick) throws Exception;
+import emagent.ui.DrawableAgent;
+import emagent.ui.TickListener;
+
+public interface IAgent extends TickListener{
+	void subscribeToUpdates(DrawableAgent drawableAgent);
 }

@@ -8,7 +8,7 @@ import java.util.Collection;
 import emagent.auction.*;
 import emagent.environment.Environment;
 
-public abstract class Market implements IMarket {
+public abstract class Market extends AbstractAgent implements IMarket {
 	protected ArrayList<IBrp> auctionListeners;
 	
 	public Market()
@@ -24,9 +24,18 @@ public abstract class Market implements IMarket {
 		auctionListeners.remove( l);
 	}
 
-	@Override
-	public void notifyTurnOver(int newTick) throws Exception {
+	
+	
+	
+	
 
+	public Object getAuctioneers() {
+		return auctionListeners.clone();
+	}
+	
+	@Override
+	public void startRound() throws Exception
+	{
 		shuffle();
 		ArrayList<IAuction> auctions = postRound();
 		shuffle(auctions);
@@ -34,6 +43,12 @@ public abstract class Market implements IMarket {
 		handoutRound(results);
 		cleanUp();
 		Environment.getEnvironment().turnOver();
+	}
+
+	@Override
+	public void notifyTick(int newTick) throws Exception {
+
+	
 	}
 
 	protected final void cleanUp() {

@@ -11,12 +11,14 @@ import emagent.auction.IAuctionFactory;
 import emagent.auction.IAuctionResult;
 import emagent.environment.IFine;
 
-public class Brp implements IBrp{
+
+public class Brp extends AbstractAgent implements IBrp{
 	
 	protected int electricalBalance = 0;
 	protected int monetaryBalance;
 	protected Collection<IProsumer> prosumers;
 	protected IAuctionFactory auctionFactory;
+	
 	
 	public Brp( int monetaryBalance)
 	{
@@ -35,9 +37,9 @@ public class Brp implements IBrp{
 
 
 	@Override
-	public void notifyTurnOver(int newTick) {
+	public void notifyTick(int newTick) {
 		this.electricalBalance = 0;
-		
+		//update();
 	}
 
 	@Override
@@ -48,6 +50,7 @@ public class Brp implements IBrp{
 			IAuction auction = AuctionFactory.getFactory().create(auctionType, - getTotalConsumption(), 1, this);
 			auctions.add(auction);
 		}
+		
 		return auctions;
 	}
 
@@ -63,7 +66,7 @@ public class Brp implements IBrp{
 			this.monetaryBalance += auctionResult.getPrice();
 			this.electricalBalance -= auctionResult.getQuantity();
 		}
-		
+		update();
 	}
 
 	@Override
@@ -74,7 +77,7 @@ public class Brp implements IBrp{
 			auction.add(new Bid( (int) (Math.random()* 4 +1),this) );
 		}
 		
-		
+		update();
 	}
 
 	@Override
@@ -102,4 +105,6 @@ public class Brp implements IBrp{
 		return total;
 	}
 
+	
+	
 }
