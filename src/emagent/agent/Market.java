@@ -24,8 +24,13 @@ public abstract class Market extends AbstractAgent implements IMarket {
 		auctionListeners.remove( l);
 	}
 
-	
-	
+	@Override
+	public Collection<IBrp> getAuctionListeners()
+	{
+		ArrayList<IBrp> res = new ArrayList<IBrp>();
+		res.addAll(auctionListeners);
+		return res;
+	}
 	
 	
 
@@ -37,7 +42,7 @@ public abstract class Market extends AbstractAgent implements IMarket {
 	public void startRound() throws Exception
 	{
 		shuffle();
-		ArrayList<IAuction> auctions = postRound();
+		AuctionList auctions = postRound();
 		shuffle(auctions);
 		Collection<IAuctionResult> results = bidRound(auctions);
 		handoutRound(results);
@@ -65,9 +70,9 @@ public abstract class Market extends AbstractAgent implements IMarket {
 		Collections.shuffle(auctionListeners);
 	}
 	
-	protected ArrayList<IAuction> postRound()
+	protected AuctionList postRound()
 	{
-		ArrayList<IAuction> auctions = new ArrayList<IAuction>();
+		AuctionList auctions = new AuctionList();
 		Collection<IAuction> curPost;
 		for(IBrp brp : auctionListeners)
 		{
@@ -83,13 +88,16 @@ public abstract class Market extends AbstractAgent implements IMarket {
 	
 	protected abstract AuctionType getAuctionType();
 
-	protected abstract Collection<IAuctionResult> bidRound(ArrayList<IAuction> auctions) throws Exception;
+	protected abstract Collection<IAuctionResult> bidRound(AuctionList auctions) throws Exception;
 	
 	protected void handoutRound(Collection<IAuctionResult> results)
 	{
 		for(IAuctionResult result : results)
 		{
-			result.getBuyer().notifyAuctionResult(result);
+			if(!(result instanceof NotSoldResult))
+			{
+				result.getBuyer().notifyAuctionResult(result);
+			}
 			result.getSeller().notifyAuctionResult(result);
 		}
 	}

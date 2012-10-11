@@ -13,10 +13,11 @@ public class Environment implements IEnvironment {
 	protected int time;
 
 	private IMarket market;
-	private boolean turnOver = false;
+	private ITso tso;
 	private ArrayList<TickListener> tickNotifiers;
 	private ArrayList<IBrp> brps;
 	private ArrayList<IProsumer> prosumers;
+	private int standardElectricityPrice = 1000;
 
 	public static IEnvironment getEnvironment()
 	{
@@ -34,6 +35,11 @@ public class Environment implements IEnvironment {
 		prosumers = new ArrayList<IProsumer>();
 	}
 	
+	
+	private int getStandardElectricityPrice()
+	{
+		return standardElectricityPrice;
+	}
 	
 	
 
@@ -61,24 +67,32 @@ public class Environment implements IEnvironment {
 		return market;
 	}
 	
+	private IBrp createBrp(int cash)
+	{
+		IBrp brp1 = new Brp(cash);
+	
+		market.subscribeToAuctions(brp1);
+	
+		
+		brps.add(brp1);
+		
+		return brp1;
+	}
+	
 	@Override
 	public void start(TickListener tickListener) throws Exception {
 		tickNotifiers.add(tickListener);
 		market = new FirstPriceSealedBidOneShotMarket();
+		tso = new Tso(market);
 		
 		
 		
-		IBrp brp1 = new Brp(100);
-		IBrp brp2 = new Brp(100);
-		IBrp brp3 = new Brp(-100);
+		IBrp brp1 = createBrp(getStandardConsumationElectricityPrice()*15);
+		IBrp brp2 = createBrp(getStandardConsumationElectricityPrice()*15);
+		IBrp brp3 = createBrp(getStandardConsumationElectricityPrice()*15);
+		IBrp brp4 = createBrp(getStandardConsumationElectricityPrice()*15);
 		
-		market.subscribeToAuctions(brp1);
-		market.subscribeToAuctions(brp2);
-		market.subscribeToAuctions(brp3);
 		
-		brps.add(brp1);
-		brps.add(brp2);
-		brps.add(brp3);
 		
 		I2IFunction func1 = new I2IFunction()
 		{
@@ -104,18 +118,20 @@ public class Environment implements IEnvironment {
 		IProsumer pro2 = new ConstantProsumer(-10);
 		IProsumer pro3 = new VariableProsumer(func1);
 		IProsumer pro4 = new VariableProsumer(func2);
-		
+		IProsumer pro5 = new ConstantProsumer(11);
+		IProsumer pro6 = new ConstantProsumer(-10);
 		prosumers.add(pro1);
 		prosumers.add(pro2);
 		prosumers.add(pro3);
 		prosumers.add(pro4);
-		
+		prosumers.add(pro5);
+		prosumers.add(pro6);
 		brp1.addProsumer(pro1);
 		brp2.addProsumer(pro2);
 		brp1.addProsumer(pro3);
 		brp3.addProsumer(pro4);
-		
-		
+		brp4.addProsumer(pro5);
+		brp4.addProsumer(pro6);
 		
 			
 	
@@ -136,7 +152,9 @@ public class Environment implements IEnvironment {
 			{
 				tl.notifyTick(getTime());
 			}
+			
 			market.startRound();
+			tso.checkBrps();
 			Thread.sleep(100);
 		
 		}
@@ -151,6 +169,21 @@ public class Environment implements IEnvironment {
 	public void turnOver() throws Exception {
 		
 
+	}
+
+	@Override
+	public int getStandardConsumationElectricityPrice() {
+		return (int) (getStandardElectricityPrice() * 1.10);
+	}
+
+	@Override
+	public int getStandardProductionElectricityPrice() {
+		return (int) (getStandardElectricityPrice() * 0.90);
+	}
+
+	@Override
+	public int getStandardFineElectricityPrice() {
+		return (int) (getStandardElectricityPrice() * 2);
 	}
 
 }

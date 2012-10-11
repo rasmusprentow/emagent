@@ -11,6 +11,7 @@ public abstract class Auction implements IAuction{
 	protected IBrp seller;
 	protected Stack<IBid> bids;
 	protected IAuctionResult result;
+	private boolean bidAdded = false;
 	
 	public Auction(int quantity, int startingPrice, IBrp seller)
 	{
@@ -26,8 +27,15 @@ public abstract class Auction implements IAuction{
 		{
 			throw new Exception("Auction has not yet been posted");
 		}
+		if(!verifyBid(e))
+		{
+			return false;
+		}
+		bidAdded = true;
 		return bids.add(e);
 	}
+	
+	abstract boolean verifyBid(IBid bid);
 
 	public AuctionStatus getStatus() {
 		return status;
@@ -56,7 +64,16 @@ public abstract class Auction implements IAuction{
 	@Override
 	public void close() {
 		status = AuctionStatus.DONE;
-
 	}
 
+	
+	@Override
+	public void newBiddingRound() {
+		this.bidAdded = true;
+	}
+
+	@Override
+	public boolean bidAdded() {
+		return bidAdded;
+	}
 }

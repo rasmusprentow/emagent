@@ -1,17 +1,17 @@
 package emagent.environment;
 
 public class LinearFine implements IFine {
-	protected int amountPerImbalance;
+	protected int pricePerImbalance;
 	protected int imbalance;
 	
 	public LinearFine(int amountPerImbalance, int imbalance)
 	{
-		this.amountPerImbalance = amountPerImbalance;
+		this.pricePerImbalance = amountPerImbalance;
 		this.imbalance = imbalance;
 	}
 	
 	public int amount()
 	{
-		return imbalance*amountPerImbalance;
+		return imbalance*pricePerImbalance;
 	}
 }

@@ -28,4 +28,13 @@ public class FirstPriceSealedBidOneShotAuction extends Auction {
 
 	}
 
+	@Override
+	boolean verifyBid(IBid bid) {
+		if(bid.getPrice() < getStartingPrice())
+		{
+			return false;
+		}
+		return true;
+	}
+
 }
