@@ -2,6 +2,8 @@ package emagent.agent;
 
 import java.util.Collection;
 
+import emagent.auction.AuctionLog;
+
 
 
 public interface IMarket extends IAgent {
@@ -15,5 +17,7 @@ public interface IMarket extends IAgent {
 	public abstract void startRound() throws Exception;
 
 	Collection<IBrp> getAuctionListeners();
+
+	public AuctionLog getAuctionHistory();
 
 }
