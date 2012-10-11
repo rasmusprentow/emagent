@@ -41,10 +41,6 @@ public class FirstPriceSealedBidOneShotMarket extends Market {
 		return auctionType;
 	}
 
-	@Override
-	public AuctionLog getAuctionHistory() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }

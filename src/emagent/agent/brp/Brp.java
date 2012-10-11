@@ -28,9 +28,11 @@ public class Brp extends AbstractAgent implements IBrp{
 	private int biddedThisRound = 0;
 	protected HashMap<AuctionType,IBrpSellingStrategy> sellingStrategies;
 	protected HashMap<AuctionType,IBrpBiddingStrategy> biddingStrategies;
+	private String name;
 	
-	public Brp( int monetaryBalance)
+	public Brp(String name, int monetaryBalance)
 	{
+		this.name = name;
 		this.monetaryBalance = monetaryBalance;
 		prosumers = new ArrayList<IProsumer>();
 		sellingStrategies = new HashMap<AuctionType, IBrpSellingStrategy>();
@@ -132,7 +134,10 @@ public class Brp extends AbstractAgent implements IBrp{
 	}
 
 	
-
+	public String toString()
+	{
+		return name;
+	}
 	
 	
 }

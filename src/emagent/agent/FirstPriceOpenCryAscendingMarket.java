@@ -40,10 +40,6 @@ public class FirstPriceOpenCryAscendingMarket extends Market implements IAgent {
 		return results;
 	}
 
-	@Override
-	public AuctionLog getAuctionHistory() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }
