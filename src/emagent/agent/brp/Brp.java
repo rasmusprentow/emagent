@@ -75,28 +75,16 @@ public class Brp extends AbstractAgent implements IBrp{
 
 	@Override
 	public void notifyAuctionsAvailable(AuctionList auctions) throws Exception {
-		
-		IBrpBiddingStrategy biddingStrategy = biddingStrategies.get(auctions.get(0).);
+		if(auctions.isEmpty())
+		{
+			return;
+		}
+		IBrpBiddingStrategy biddingStrategy = biddingStrategies.get(auctions.get(0).getAuctionType());
 		if(biddingStrategy == null)
 		{
 			throw new Error();
 		}
-		if(getTotalConsumption() > 0)
-		{	
-			auctions.sortByPrice();
-			for(IAuction auction : auctions)
-			{
-			
-				int bidPrice =  (int) (Math.random()* 1 + auction.getStartingPrice()) * auction.getQuantity();
-				
-				if(bidPrice <= this.monetaryBalance - biddedThisRound)
-				{
-					biddedThisRound += bidPrice;
-					auction.addBid(new Bid( bidPrice,this) );
-				}
-			}
-		}
-		
+		biddingStrategy.bidOnAuctions(auctions, monetaryBalance, getCurrentElectricalBalance(), this);
 		update();
 	}
 

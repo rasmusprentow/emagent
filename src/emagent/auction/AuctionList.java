@@ -14,40 +14,39 @@ public class AuctionList extends ArrayList<IAuction> {
 	 */
 	private static final long serialVersionUID = -9109657888610000487L;
 
-	public void sortByPrice()
+	public AuctionList sortByPrice(boolean ascending)
 	{
-		
+		final int multiplyer = ascending ? 1 : -1;
 		Collections.sort(this, new Comparator<IAuction>() {
-
-		
-
 			@Override
 			public int compare(IAuction o1, IAuction o2) {
-				return o1.getStartingPrice() - o2.getStartingPrice();
-				
+				return (o1.getStartingPrice() - o2.getStartingPrice()) * multiplyer;
 			}
-			
-			
 		});
 		
+		return this;
 	}
 	
-	public void sortByQuantity()
+	public AuctionList sortByPrice()
 	{
-		
+		return sortByPrice(true);
+	}
+	
+	public AuctionList sortByQuantity(boolean ascending)
+	{
+		final int multiplyer = ascending ? 1 : -1;
 		Collections.sort(this, new Comparator<IAuction>() {
-
-		
-
 			@Override
 			public int compare(IAuction o1, IAuction o2) {
-				return o1.getQuantity() - o2.getQuantity();
-				
+				return (o1.getQuantity() - o2.getQuantity()) * multiplyer;
 			}
-			
-			
 		});
-		
+		return this;
+	}
+	
+	public AuctionList sortByQuantity()
+	{
+		return sortByQuantity(true);
 	}
 	
 	public boolean bidsAddedThisRound()

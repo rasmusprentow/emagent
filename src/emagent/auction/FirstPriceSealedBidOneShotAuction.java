@@ -6,6 +6,8 @@ import emagent.agent.brp.*;
 
 public class FirstPriceSealedBidOneShotAuction extends Auction {
 
+	private AuctionType auctionType;
+
 	public FirstPriceSealedBidOneShotAuction(int quantity, int startingPrice,
 			IBrp seller) {
 		super(quantity, startingPrice, seller);
@@ -53,6 +55,15 @@ public class FirstPriceSealedBidOneShotAuction extends Auction {
 	@Override
 	public int getMaximumBidPrice() {
 		return Integer.MAX_VALUE;
+	}
+
+	@Override
+	public  AuctionType getAuctionType() {
+		if(auctionType == null)
+		{
+			auctionType = new AuctionType(BidPrice.FIRST, BidType.SEALED,BidOrder.ONE_SHOT);
+		}
+		return auctionType;
 	}
 
 }
