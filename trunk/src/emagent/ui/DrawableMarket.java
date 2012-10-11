@@ -8,7 +8,7 @@ import java.awt.Label;
 
 import javax.swing.JPanel;
 
-import emagent.agent.IBrp;
+import emagent.agent.brp.*;
 import emagent.agent.IMarket;
 import emagent.auction.Auction;
 import emagent.auction.AuctionLog;

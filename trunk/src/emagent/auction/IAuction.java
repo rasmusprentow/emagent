@@ -18,4 +18,5 @@ public interface IAuction {
 	public void newBiddingRound();
 	public boolean bidAdded();
 	public int getMaximumBidPrice();
+	public AuctionType getAuctionType();
 }
