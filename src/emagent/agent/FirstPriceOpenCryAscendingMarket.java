@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import emagent.auction.AuctionList;
+import emagent.auction.AuctionLog;
 import emagent.auction.AuctionType;
 import emagent.auction.BidOrder;
 import emagent.auction.BidPrice;
@@ -37,6 +38,12 @@ public class FirstPriceOpenCryAscendingMarket extends Market implements IAgent {
 			results.add(auction.getResult());
 		}
 		return results;
+	}
+
+	@Override
+	public AuctionLog getAuctionHistory() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
