@@ -17,4 +17,8 @@ public interface IEnvironment {
 	public abstract ArrayList<IProsumer> getProsumers();
 	public abstract ArrayList<IBrp> getBrps();
 	public abstract ArrayList<TickListener> getTickNotifiers();
+
+	public int getStandardConsumationElectricityPrice();
+	int getStandardProductionElectricityPrice();
+	public int getStandardFineElectricityPrice();
 }

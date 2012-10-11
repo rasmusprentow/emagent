@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import emagent.auction.AuctionFactory;
+import emagent.auction.AuctionList;
 import emagent.auction.AuctionType;
 import emagent.auction.Bid;
 import emagent.auction.IAuction;
 import emagent.auction.IAuctionFactory;
 import emagent.auction.IAuctionResult;
+import emagent.auction.NotSoldResult;
 import emagent.environment.IFine;
 
 
@@ -18,7 +20,7 @@ public class Brp extends AbstractAgent implements IBrp{
 	protected int monetaryBalance;
 	protected Collection<IProsumer> prosumers;
 	protected IAuctionFactory auctionFactory;
-	
+	private int biddedThisRound = 0;
 	
 	public Brp( int monetaryBalance)
 	{
@@ -39,6 +41,10 @@ public class Brp extends AbstractAgent implements IBrp{
 	@Override
 	public void notifyTick(int newTick) {
 		this.electricalBalance = 0;
+		for(IProsumer prosumer : this.prosumers){
+			this.monetaryBalance += prosumer.payElectricalBill();
+		}
+	
 		//update();
 	}
 
@@ -47,7 +53,7 @@ public class Brp extends AbstractAgent implements IBrp{
 		Collection<IAuction> auctions = new ArrayList<IAuction>();
 		if(getTotalConsumption() < 0)
 		{
-			IAuction auction = AuctionFactory.getFactory().create(auctionType, - getTotalConsumption(), 1, this);
+			IAuction auction = AuctionFactory.getFactory().create(auctionType, - getTotalConsumption(), 10 * ( - getTotalConsumption()), this);
 			auctions.add(auction);
 		}
 		
@@ -56,25 +62,40 @@ public class Brp extends AbstractAgent implements IBrp{
 
 	@Override
 	public void notifyAuctionResult(IAuctionResult auctionResult) {
-		if(auctionResult.getBuyer() == this)
+		if(!(auctionResult instanceof NotSoldResult))
 		{
-			this.monetaryBalance -= auctionResult.getPrice();
-			this.electricalBalance += auctionResult.getQuantity();
-		}
-		if(auctionResult.getSeller() == this)
-		{
-			this.monetaryBalance += auctionResult.getPrice();
-			this.electricalBalance -= auctionResult.getQuantity();
+			if(auctionResult.getBuyer() == this)
+			{
+				this.monetaryBalance -= auctionResult.getPrice();
+				this.electricalBalance += auctionResult.getQuantity();
+			}
+			if(auctionResult.getSeller() == this)
+			{
+				this.monetaryBalance += auctionResult.getPrice();
+				this.electricalBalance -= auctionResult.getQuantity();
+			}
 		}
 		update();
 	}
 
 	@Override
-	public void notifyAuctionAvailable(IAuction auction) throws Exception {
+	public void notifyAuctionsAvailable(AuctionList auctions) throws Exception {
 		if(getTotalConsumption() > 0)
-		{
+		{	
+			auctions.sortByPrice();
+			for(IAuction auction : auctions)
+			{
 			
-			auction.add(new Bid( (int) (Math.random()* 4 +1),this) );
+				int bidPrice =  (int) (Math.random()* 1 + auction.getStartingPrice()) * auction.getQuantity();
+				
+				if(bidPrice <= this.monetaryBalance - biddedThisRound)
+				{
+					biddedThisRound += bidPrice;
+					auction.add(new Bid( bidPrice,this) );
+				}
+			}
+			
+			
 		}
 		
 		update();

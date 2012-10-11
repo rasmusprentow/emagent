@@ -22,4 +22,8 @@ public interface IAuction {
 	public void close();
 
 	public IAuctionResult getResult();
+
+	void newBiddingRound();
+
+	boolean bidAdded();
 }

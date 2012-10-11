@@ -43,6 +43,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 	//	leftSide.setLayout(new GridLayout(1,1))
 		
 		
+		
 		center.add(new Label("BRPs"), BorderLayout.NORTH);
 		
 		totalConsumptionLabel = new Label(TOTAL_CONSUMATION_STRING + "0 MW");
@@ -64,6 +65,17 @@ public class EmagentPanel extends JPanel implements TickListener{
 		
 		prosumersPanel = new JPanel();
 		rightSide.add(prosumersPanel, BorderLayout.CENTER);
+		
+		center.setBackground(Color.black);
+		center.setForeground(Color.yellow);
+		leftSide.setBackground(Color.black);
+		leftSide.setForeground(Color.yellow);
+		rightSide.setBackground(Color.black);
+		rightSide.setForeground(Color.yellow);
+		brpsPanel.setBackground(Color.black);
+		brpsPanel.setForeground(Color.yellow);
+		prosumersPanel.setBackground(Color.black);
+		prosumersPanel.setForeground(Color.yellow);
 	}
 	
 	public void updateTotalEnergyConsumation()

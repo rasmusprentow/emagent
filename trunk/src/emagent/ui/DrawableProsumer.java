@@ -19,7 +19,7 @@ public class DrawableProsumer extends DrawableAgent {
 	public DrawableProsumer(IProsumer pro)
 	{
 		super();
-		setPreferredSize(new Dimension(30,30));
+		setPreferredSize(new Dimension(40,20));
 		setLayout(new GridLayout(1,1));
 		setVisible(true);
 		setBackground(Color.GREEN);
@@ -36,5 +36,6 @@ public class DrawableProsumer extends DrawableAgent {
 		consumation.setText("" + prosumer.getTotalConsumption());
 		
 	}
-
+	
+	public String toString(){ return "" ;};
 }
