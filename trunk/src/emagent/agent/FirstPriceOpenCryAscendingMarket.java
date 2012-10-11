@@ -10,6 +10,7 @@ import emagent.auction.BidPrice;
 import emagent.auction.BidType;
 import emagent.auction.IAuction;
 import emagent.auction.IAuctionResult;
+import emagent.agent.brp.*;
 
 public class FirstPriceOpenCryAscendingMarket extends Market implements IAgent {
 	private AuctionType auctionType;

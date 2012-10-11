@@ -2,7 +2,7 @@ package emagent.auction;
 
 import java.util.EmptyStackException;
 
-import emagent.agent.IBrp;
+import emagent.agent.brp.*;
 
 public class FirstPriceSealedBidOneShotAuction extends Auction {
 
@@ -35,6 +35,24 @@ public class FirstPriceSealedBidOneShotAuction extends Auction {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int getMinimumBidPrice() {
+		int min = getStartingPrice();
+		for(IBid bid : bids)
+		{
+			if(bid.getPrice() > min)
+			{
+				min = bid.getPrice();
+			}
+		}
+		return min;
+	}
+
+	@Override
+	public int getMaximumBidPrice() {
+		return Integer.MAX_VALUE;
 	}
 
 }

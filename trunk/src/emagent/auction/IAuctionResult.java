@@ -1,6 +1,7 @@
 package emagent.auction;
 
-import emagent.agent.IBrp;
+
+import emagent.agent.brp.*;
 
 public interface IAuctionResult {
 	public IAuction getAuction();

@@ -7,7 +7,7 @@ import java.awt.Label;
 
 import javax.swing.BorderFactory;
 
-import emagent.agent.IBrp;
+import emagent.agent.brp.*;
 
 public class DrawableBrp extends DrawableAgent {
 

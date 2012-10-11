@@ -14,7 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import emagent.agent.IBrp;
+import emagent.agent.brp.*;
 import emagent.agent.IProsumer;
 import emagent.environment.Environment;
 

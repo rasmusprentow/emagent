@@ -1,6 +1,7 @@
 package emagent.agent;
 
 import emagent.environment.Environment;
+import emagent.agent.brp.*;
 import emagent.environment.LinearFine;
 
 public class Tso extends AbstractAgent implements ITso {

@@ -1,6 +1,7 @@
 package emagent.auction;
 
 
+import emagent.agent.brp.*;
 
 public class NotSoldResult extends AuctionResult {
 

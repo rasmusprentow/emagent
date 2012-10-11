@@ -1,12 +1,17 @@
-package emagent.agent;
+package emagent.agent.brp;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
+import emagent.agent.*;
 import emagent.auction.AuctionFactory;
 import emagent.auction.AuctionList;
 import emagent.auction.AuctionType;
 import emagent.auction.Bid;
+import emagent.auction.BidOrder;
+import emagent.auction.BidPrice;
+import emagent.auction.BidType;
 import emagent.auction.IAuction;
 import emagent.auction.IAuctionFactory;
 import emagent.auction.IAuctionResult;
@@ -21,11 +26,21 @@ public class Brp extends AbstractAgent implements IBrp{
 	protected Collection<IProsumer> prosumers;
 	protected IAuctionFactory auctionFactory;
 	private int biddedThisRound = 0;
+	protected HashMap<AuctionType,IBrpSellingStrategy> sellingStrategies;
+	protected HashMap<AuctionType,IBrpBiddingStrategy> biddingStrategies;
 	
 	public Brp( int monetaryBalance)
 	{
 		this.monetaryBalance = monetaryBalance;
 		prosumers = new ArrayList<IProsumer>();
+		sellingStrategies = new HashMap<AuctionType, IBrpSellingStrategy>();
+		sellingStrategies.put(
+				new AuctionType(BidPrice.FIRST, BidType.SEALED, BidOrder.ONE_SHOT), 
+				new FirstPriceSealedBidOneShotSellingStrategy());
+		biddingStrategies = new HashMap<AuctionType, IBrpBiddingStrategy>();
+		biddingStrategies.put(
+				new AuctionType(BidPrice.FIRST, BidType.SEALED, BidOrder.ONE_SHOT), 
+				new FirstPriceSealedBidOneShotBiddingStrategy());
 	}
 	
 	public boolean addProsumer(IProsumer e) {
@@ -50,14 +65,39 @@ public class Brp extends AbstractAgent implements IBrp{
 
 	@Override
 	public Collection<IAuction> notifyPostRound(AuctionType auctionType) {
-		Collection<IAuction> auctions = new ArrayList<IAuction>();
-		if(getTotalConsumption() < 0)
+		IBrpSellingStrategy sellingStrategy = sellingStrategies.get(auctionType);
+		if(sellingStrategy == null)
 		{
-			IAuction auction = AuctionFactory.getFactory().create(auctionType, - getTotalConsumption(), 10 * ( - getTotalConsumption()), this);
-			auctions.add(auction);
+			throw new Error();
+		}
+		return sellingStrategy.postAuctions(-getTotalConsumption(),auctionType,this);
+	}
+
+	@Override
+	public void notifyAuctionsAvailable(AuctionList auctions) throws Exception {
+		
+		IBrpBiddingStrategy biddingStrategy = biddingStrategies.get(auctions.get(0).);
+		if(biddingStrategy == null)
+		{
+			throw new Error();
+		}
+		if(getTotalConsumption() > 0)
+		{	
+			auctions.sortByPrice();
+			for(IAuction auction : auctions)
+			{
+			
+				int bidPrice =  (int) (Math.random()* 1 + auction.getStartingPrice()) * auction.getQuantity();
+				
+				if(bidPrice <= this.monetaryBalance - biddedThisRound)
+				{
+					biddedThisRound += bidPrice;
+					auction.addBid(new Bid( bidPrice,this) );
+				}
+			}
 		}
 		
-		return auctions;
+		update();
 	}
 
 	@Override
@@ -75,29 +115,6 @@ public class Brp extends AbstractAgent implements IBrp{
 				this.electricalBalance -= auctionResult.getQuantity();
 			}
 		}
-		update();
-	}
-
-	@Override
-	public void notifyAuctionsAvailable(AuctionList auctions) throws Exception {
-		if(getTotalConsumption() > 0)
-		{	
-			auctions.sortByPrice();
-			for(IAuction auction : auctions)
-			{
-			
-				int bidPrice =  (int) (Math.random()* 1 + auction.getStartingPrice()) * auction.getQuantity();
-				
-				if(bidPrice <= this.monetaryBalance - biddedThisRound)
-				{
-					biddedThisRound += bidPrice;
-					auction.add(new Bid( bidPrice,this) );
-				}
-			}
-			
-			
-		}
-		
 		update();
 	}
 
