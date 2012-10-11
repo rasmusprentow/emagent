@@ -3,6 +3,7 @@ package emagent.agent;
 
 
 import java.util.ArrayList;
+import emagent.agent.brp.*;
 import java.util.Collections;
 import java.util.Collection;
 import emagent.auction.*;

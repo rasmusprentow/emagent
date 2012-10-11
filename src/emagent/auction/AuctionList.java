@@ -62,5 +62,13 @@ public class AuctionList extends ArrayList<IAuction> {
 		return false;
 	}
 	
+	public void newBiddingRound()
+	{
+		for(IAuction auction : this)
+		{
+			auction.newBiddingRound();
+		}
+	}
+	
 	
 }

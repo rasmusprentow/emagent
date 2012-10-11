@@ -4,6 +4,7 @@ package emagent.environment;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import emagent.agent.brp.*;
 import emagent.agent.*;
 import emagent.ui.TickListener;
 

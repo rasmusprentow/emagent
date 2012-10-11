@@ -1,8 +1,8 @@
 package emagent.auction;
 
 import java.util.Stack;
+import emagent.agent.brp.*;
 
-import emagent.agent.IBrp;
 
 public abstract class Auction implements IAuction{
 	protected int quantity;
@@ -22,7 +22,7 @@ public abstract class Auction implements IAuction{
 		bids = new Stack<IBid>();
 	}
 
-	public boolean add(IBid e) throws Exception {
+	public boolean addBid(IBid e) throws Exception {
 		if(status != AuctionStatus.POSTED)
 		{
 			throw new Exception("Auction has not yet been posted");
@@ -69,7 +69,7 @@ public abstract class Auction implements IAuction{
 	
 	@Override
 	public void newBiddingRound() {
-		this.bidAdded = true;
+		this.bidAdded = false;
 	}
 
 	@Override

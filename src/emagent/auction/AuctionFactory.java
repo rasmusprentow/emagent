@@ -1,6 +1,6 @@
 package emagent.auction;
 
-import emagent.agent.IBrp;
+import emagent.agent.brp.*;
 
 public class AuctionFactory implements IAuctionFactory {
 

@@ -23,4 +23,24 @@ public class AuctionType {
 	public BidOrder getBidOrder() {
 		return bidOrder;
 	}
+	
+	@Override
+	public boolean equals(Object o)
+	{
+		if(o instanceof AuctionType)
+		{
+			AuctionType other = (AuctionType)o;
+			return  this.getBidOrder() == other.getBidOrder() &&
+					this.getBidPrice() == other.getBidPrice() &&
+					this.getBidType() == other.getBidType();
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		return getBidOrder().hashCode() ^ getBidPrice().hashCode() ^ getBidType().hashCode(); 
+	}
 }

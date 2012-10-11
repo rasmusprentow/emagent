@@ -1,6 +1,7 @@
 package emagent.auction;
 
-import emagent.agent.IBrp;
+
+import emagent.agent.brp.*;
 
 public class Bid implements IBid {
 	protected int price;
