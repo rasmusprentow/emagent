@@ -5,6 +5,7 @@ import emagent.agent.brp.*;
 import java.util.Collection;
 
 import emagent.auction.AuctionList;
+import emagent.auction.AuctionLog;
 import emagent.auction.AuctionType;
 import emagent.auction.BidOrder;
 import emagent.auction.BidPrice;
@@ -38,6 +39,12 @@ public class FirstPriceSealedBidOneShotMarket extends Market {
 			auctionType = new AuctionType(BidPrice.FIRST, BidType.SEALED,BidOrder.ONE_SHOT);
 		}
 		return auctionType;
+	}
+
+	@Override
+	public AuctionLog getAuctionHistory() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
