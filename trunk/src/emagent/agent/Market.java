@@ -11,7 +11,7 @@ import emagent.environment.Environment;
 
 public abstract class Market extends AbstractAgent implements IMarket {
 	protected ArrayList<IBrp> auctionListeners;
-	
+	protected AuctionLog auctionLog;
 	public Market()
 	{
 		auctionListeners = new ArrayList<IBrp>();
@@ -101,5 +101,11 @@ public abstract class Market extends AbstractAgent implements IMarket {
 			}
 			result.getSeller().notifyAuctionResult(result);
 		}
+	}
+	
+	@Override
+	public AuctionLog getAuctionHistory() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

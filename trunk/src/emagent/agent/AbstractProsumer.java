@@ -4,6 +4,8 @@ import emagent.environment.Environment;
 
 abstract public class AbstractProsumer extends AbstractAgent implements IProsumer {
 	
+
+
 	public int payElectricalBill()
 	{
 		if(this.getTotalConsumption() >= 0){

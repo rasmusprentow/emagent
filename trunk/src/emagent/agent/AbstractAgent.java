@@ -6,6 +6,8 @@ abstract public class AbstractAgent implements IAgent{
 
 	protected DrawableAgent drawableAgent;
 	
+	
+	
 	public void subscribeToUpdates(DrawableAgent drawableAgent) {
 		this.drawableAgent =  drawableAgent;
 	
@@ -19,4 +21,5 @@ abstract public class AbstractAgent implements IAgent{
 			drawableAgent.update();
 		}
 	}
+	
 }
