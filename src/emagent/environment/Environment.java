@@ -68,9 +68,9 @@ public class Environment implements IEnvironment {
 		return market;
 	}
 	
-	private IBrp createBrp(int cash)
+	private IBrp createBrp(String name, int cash)
 	{
-		IBrp brp1 = new Brp(cash);
+		IBrp brp1 = new Brp(name, cash);
 	
 		market.subscribeToAuctions(brp1);
 	
@@ -88,10 +88,10 @@ public class Environment implements IEnvironment {
 		
 		
 		
-		IBrp brp1 = createBrp(getStandardConsumationElectricityPrice()*15);
-		IBrp brp2 = createBrp(getStandardConsumationElectricityPrice()*15);
-		IBrp brp3 = createBrp(getStandardConsumationElectricityPrice()*15);
-		IBrp brp4 = createBrp(getStandardConsumationElectricityPrice()*15);
+		IBrp brp1 = createBrp("Brp 1", getStandardConsumationElectricityPrice()*15);
+		IBrp brp2 = createBrp("Brp 2",getStandardConsumationElectricityPrice()*15);
+		IBrp brp3 = createBrp("Brp 3",getStandardConsumationElectricityPrice()*15);
+		IBrp brp4 = createBrp("Brp 4",getStandardConsumationElectricityPrice()*15);
 		
 		
 		
@@ -108,7 +108,7 @@ public class Environment implements IEnvironment {
 		{
 			@Override
 			public int map(int arg) {
-				return (int) (-0.01 * arg);
+				return (int) (100*Math.sin(arg));
 				
 			}
 		};
@@ -141,6 +141,7 @@ public class Environment implements IEnvironment {
 		tickNotifiers.addAll(prosumers);
 		tickNotifiers.addAll(brps);
 		tickNotifiers.add(market);
+		
 		
 		
 		

@@ -20,14 +20,14 @@ public class DrawableBrp extends DrawableAgent {
 	private Label consumation;
 	private Label electricity;
 	public DrawableBrp(IBrp brp) {
-		super();
-		//
+		
+		this.brp = brp;
 		setPreferredSize(new Dimension(99,99));
 		setLayout(new GridLayout(4,1));
 		setVisible(true);
 		setBackground(Color.GREEN);
+		this.add(new Label(this.toString()));
 		
-		this.brp = brp;
 		brp.subscribeToUpdates(this);
 		money = new Label("Money           ");
 		electricity = new Label("electricity              ");
@@ -48,7 +48,7 @@ public class DrawableBrp extends DrawableAgent {
 	
 	public String toString()
 	{
-		return "BRP";
+		return this.brp.toString();
 	}
 	
 	
