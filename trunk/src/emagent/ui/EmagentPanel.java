@@ -29,11 +29,12 @@ public class EmagentPanel extends JPanel implements TickListener{
 	private ArrayList<DrawableAgent> drawableAgents = null;
 	private  JPanel brpsPanel;
 	private  JPanel prosumersPanel;
+	private DrawableMarket market;
 	public EmagentPanel()
 	{
 		this.setLayout( new GridLayout(1,3) );
 		leftSide = new JPanel();
-		leftSide.setLayout(new GridLayout(2,1));
+		leftSide.setLayout(new GridLayout(3,1));
 		leftSide.setSize(this.getWidth()/2, this.getWidth());
 		this.add(leftSide);
 		center = new JPanel();
@@ -122,7 +123,8 @@ public class EmagentPanel extends JPanel implements TickListener{
 				da.setBorder(BorderFactory.createEmptyBorder());
 			}
 			
-			
+			market = new DrawableMarket(Environment.getEnvironment().getMarket());
+			leftSide.add(market);
 		}
 		
 	

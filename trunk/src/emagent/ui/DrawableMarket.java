@@ -12,11 +12,14 @@ import emagent.agent.brp.*;
 import emagent.agent.IMarket;
 import emagent.auction.Auction;
 import emagent.auction.AuctionLog;
+import emagent.auction.IAuction;
 
 public class DrawableMarket extends DrawableAgent {
 
 	private IMarket market;
 	private JPanel auctionsPanel;
+	private AuctionLog auctionLog;
+	
 	public DrawableMarket(IMarket market) {
 		super();
 		//
@@ -36,14 +39,27 @@ public class DrawableMarket extends DrawableAgent {
 		this.setLayout(new BorderLayout());
 		auctionsPanel = new JPanel();
 		add(auctionsPanel);
-		AuctionLog auctionLog = market.getAuctionHistory();
+		auctionLog = market.getAuctionHistory();
 		
 		
 	}
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-
+		auctionsPanel = new JPanel();
+		auctionsPanel.setPreferredSize(new Dimension(200,200));
+		auctionsPanel.setLayout(new BorderLayout(10,1));
+		int i = 0;
+		for(IAuction auction : auctionLog)
+		{
+			JPanel aucPanel = new JPanel();
+			aucPanel.add(new Label(auction.getSeller().toString()));
+			auctionsPanel.add(aucPanel);
+			if(i >= 10)
+			{
+				continue;
+			}
+			i++;
+		}
 	}
 
 }
