@@ -4,9 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
-
-import javax.swing.BorderFactory;
-
 import emagent.agent.brp.*;
 
 public class DrawableBrp extends DrawableAgent {

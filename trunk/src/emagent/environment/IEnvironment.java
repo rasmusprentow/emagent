@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import emagent.agent.brp.*;
 import emagent.agent.IMarket;
 import emagent.agent.IProsumer;
-import emagent.ui.Writer;
 import emagent.ui.TickListener;
 
 public interface IEnvironment {
