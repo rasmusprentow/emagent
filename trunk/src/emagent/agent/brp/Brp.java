@@ -15,7 +15,6 @@ public class Brp extends AbstractAgent implements IBrp{
 	protected int monetaryBalance;
 	protected Collection<IProsumer> prosumers;
 	protected IAuctionFactory auctionFactory;
-	private int biddedThisRound = 0;
 	protected HashMap<AuctionType,IBrpSellingStrategy> sellingStrategies;
 	protected HashMap<AuctionType,IBrpBiddingStrategy> biddingStrategies;
 	private String name;
