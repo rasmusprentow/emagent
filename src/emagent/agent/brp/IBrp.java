@@ -1,9 +1,7 @@
 package emagent.agent.brp;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EventListener;
-
 import emagent.agent.*;
 import emagent.auction.*;
 import emagent.environment.IFine;

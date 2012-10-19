@@ -2,16 +2,11 @@ package emagent.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
-import java.awt.TextArea;
-import java.awt.TextField;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import emagent.agent.brp.*;
@@ -20,6 +15,10 @@ import emagent.environment.Environment;
 
 public class EmagentPanel extends JPanel implements TickListener{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel center;
 	private JPanel leftSide;
 	private JPanel rightSide;

@@ -5,17 +5,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
-
 import javax.swing.JPanel;
-
-import emagent.agent.brp.*;
 import emagent.agent.IMarket;
-import emagent.auction.Auction;
-import emagent.auction.AuctionLog;
-import emagent.auction.IAuction;
+import emagent.auction.*;
 
 public class DrawableMarket extends DrawableAgent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private IMarket market;
 	private JPanel auctionsPanel;
 	private AuctionLog auctionLog;
@@ -29,7 +28,7 @@ public class DrawableMarket extends DrawableAgent {
 		setBackground(Color.GREEN);
 		
 		this.market = market;
-		market.subscribeToUpdates(this);
+		this.market.subscribeToUpdates(this);
 		/*money = new Label("Money           ");
 		electricity = new Label("electricity              ");
 		consumation = new Label("consumation              ");

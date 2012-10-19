@@ -1,17 +1,10 @@
 package emagent.agent;
 
 import java.util.ArrayList;
-import emagent.agent.brp.*;
 import java.util.Collection;
 
-import emagent.auction.AuctionList;
-import emagent.auction.AuctionLog;
-import emagent.auction.AuctionType;
-import emagent.auction.BidOrder;
-import emagent.auction.BidPrice;
-import emagent.auction.BidType;
-import emagent.auction.IAuction;
-import emagent.auction.IAuctionResult;
+import emagent.auction.*;
+import emagent.agent.brp.*;
 
 public class FirstPriceSealedBidOneShotMarket extends Market {
 

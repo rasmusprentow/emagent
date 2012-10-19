@@ -1,8 +1,6 @@
 package emagent.ui;
 
 import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.Label;
 
 import javax.swing.JPanel;
 
