@@ -2,7 +2,6 @@ package emagent.environment;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import emagent.agent.brp.*;
 import emagent.agent.*;
@@ -113,6 +112,7 @@ public class Environment implements IEnvironment {
 			}
 		};
 		
+		/*
 		I2IFunction func3 = new I2IFunction()
 		{
 			@Override
@@ -121,6 +121,7 @@ public class Environment implements IEnvironment {
 				
 			}
 		};
+		*/
 		
 		
 		
