@@ -21,4 +21,5 @@ public interface IEnvironment {
 	public int getStandardConsumationElectricityPrice();
 	int getStandardProductionElectricityPrice();
 	public int getStandardFineElectricityPrice();
+	public int getPriceDifference();
 }

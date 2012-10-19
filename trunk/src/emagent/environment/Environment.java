@@ -108,6 +108,15 @@ public class Environment implements IEnvironment {
 		{
 			@Override
 			public int map(int arg) {
+				return (int) (-0.01 * arg);
+				
+			}
+		};
+		
+		I2IFunction func3 = new I2IFunction()
+		{
+			@Override
+			public int map(int arg) {
 				return (int) (100*Math.sin(arg));
 				
 			}
@@ -141,7 +150,6 @@ public class Environment implements IEnvironment {
 		tickNotifiers.addAll(prosumers);
 		tickNotifiers.addAll(brps);
 		tickNotifiers.add(market);
-		
 		
 		
 		
@@ -186,6 +194,11 @@ public class Environment implements IEnvironment {
 	@Override
 	public int getStandardFineElectricityPrice() {
 		return (int) (getStandardElectricityPrice() * 2);
+	}
+
+	@Override
+	public int getPriceDifference() {
+		return getStandardConsumationElectricityPrice()-getStandardProductionElectricityPrice();
 	}
 
 }

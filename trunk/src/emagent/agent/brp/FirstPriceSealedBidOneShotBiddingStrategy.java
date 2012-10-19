@@ -3,35 +3,38 @@ package emagent.agent.brp;
 import emagent.auction.AuctionList;
 import emagent.auction.Bid;
 import emagent.auction.IAuction;
+import emagent.environment.Environment;
 
 public class FirstPriceSealedBidOneShotBiddingStrategy implements
 		IBrpBiddingStrategy {
 
 	@Override
-	public int  bidOnAuctions(AuctionList auctions, int monetaryBalance,
+	public void  bidOnAuctions(AuctionList auctions, int monetaryBalance,
 			int electricalBalance, IBrp bidder) throws Exception {
-		int biddedThisRound = 0;
-		if(electricalBalance < 0)
+		if(electricalBalance < 0 && monetaryBalance > 0)
 		{	
 			auctions.sortByQuantity(false);
-			IAuction lastAuction = auctions.get(0);
 			for(IAuction auction : auctions)
 			{
 				if(electricalBalance >= 0)
 				{
 					break;
 				}
-				int bidPrice =  (int) (Math.random()* 4) * auction.getQuantity() + auction.getMinimumBidPrice();
+				int bidPrice = auction.getMinimumBidPrice();
+				int randPrice =  (int) (Math.random()* Environment.getEnvironment().getPriceDifference()) * auction.getQuantity() + bidPrice;
 				
-				if(bidPrice <= monetaryBalance - biddedThisRound)
+				if(bidPrice <= monetaryBalance)
 				{
-					biddedThisRound += bidPrice;
-					auction.addBid(new Bid( bidPrice,bidder ) );
+					if(-electricalBalance >= auction.getQuantity())
+					{
+						int finalBidPrice = Math.min(monetaryBalance, randPrice);
+						monetaryBalance -= finalBidPrice;
+						electricalBalance += auction.getQuantity();
+						auction.addBid(new Bid( finalBidPrice,bidder ) );
+					}
 				}
-				lastAuction = auction;
 			}
 		}
-		return biddedThisRound;
 	}
 
 }
