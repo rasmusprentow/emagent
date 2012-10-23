@@ -33,8 +33,18 @@ public class DrawableProsumer extends DrawableAgent {
 	
 	@Override
 	public void update() {
+		if(this.prosumer.getTotalConsumption() > 0)
+		{
+			consumation.setBackground(Color.RED);
+		}
+		else if(this.prosumer.getTotalConsumption() == 0)
+		{
+			consumation.setBackground(Color.YELLOW);
+		} else {
+			consumation.setBackground(Color.GREEN);
+		}
 		consumation.setText("" + prosumer.getTotalConsumption());
-		
+		this.repaint();
 	}
 	
 	public String toString(){ return "" ;};
