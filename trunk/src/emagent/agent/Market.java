@@ -15,6 +15,7 @@ public abstract class Market extends AbstractAgent implements IMarket {
 	public Market()
 	{
 		auctionListeners = new ArrayList<IBrp>();
+		auctionLog = new AuctionLog();
 	}
 	
 	public void subscribeToAuctions(IBrp l) {
@@ -44,8 +45,10 @@ public abstract class Market extends AbstractAgent implements IMarket {
 	{
 		shuffle();
 		AuctionList auctions = postRound();
+		
 		shuffle(auctions);
 		Collection<IAuctionResult> results = bidRound(auctions);
+		auctionLog.addAllFirst(auctions); // For logging, they must be finished or else bad stuff will hape
 		handoutRound(results);
 		cleanUp();
 		Environment.getEnvironment().turnOver();
@@ -53,7 +56,7 @@ public abstract class Market extends AbstractAgent implements IMarket {
 
 	@Override
 	public void notifyTick(int newTick) throws Exception {
-
+		update();
 	
 	}
 
@@ -105,7 +108,6 @@ public abstract class Market extends AbstractAgent implements IMarket {
 	
 	@Override
 	public AuctionLog getAuctionHistory() {
-		// TODO Auto-generated method stub
-		return null;
+		return auctionLog;
 	}
 }

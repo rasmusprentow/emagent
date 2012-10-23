@@ -33,7 +33,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 	{
 		this.setLayout( new GridLayout(1,3) );
 		leftSide = new JPanel();
-		leftSide.setLayout(new GridLayout(3,1));
+	//	leftSide.setLayout(new GridLayout(3,1));
 		leftSide.setSize(this.getWidth()/2, this.getWidth());
 		this.add(leftSide);
 		center = new JPanel();
@@ -129,7 +129,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 	
 		
 		updateTotalEnergyConsumation();
-		timeLabel.setText("Tick: " + time);
+		timeLabel.setText("Day: " + time/24 + " Hour: " + time % 24);
 	}
 
 

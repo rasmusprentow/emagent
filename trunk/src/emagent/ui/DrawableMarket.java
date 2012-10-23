@@ -3,9 +3,15 @@ package emagent.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Label;
+import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
 import emagent.agent.IMarket;
 import emagent.auction.*;
 
@@ -17,48 +23,66 @@ public class DrawableMarket extends DrawableAgent {
 	private static final long serialVersionUID = 1L;
 	private IMarket market;
 	private JPanel auctionsPanel;
+	private ArrayList<Label> auctions;
 	private AuctionLog auctionLog;
 	
 	public DrawableMarket(IMarket market) {
 		super();
-		//
-		setPreferredSize(new Dimension(199,199));
+		
+		setPreferredSize(new Dimension(199,700));
 		setLayout(new GridLayout(4,1));
 		setVisible(true);
 		setBackground(Color.GREEN);
 		
 		this.market = market;
 		this.market.subscribeToUpdates(this);
-		/*money = new Label("Money           ");
-		electricity = new Label("electricity              ");
-		consumation = new Label("consumation              ");
-		this.add(money);
-		this.add(electricity);
-		this.add(consumation);*/
+		
 		this.setLayout(new BorderLayout());
 		auctionsPanel = new JPanel();
-		add(auctionsPanel);
+		
 		auctionLog = market.getAuctionHistory();
+		auctionsPanel.setBackground(Color.BLACK);
+		auctionsPanel.setForeground(Color.YELLOW);
+		auctionsPanel.setPreferredSize(new Dimension(200,200));
+		auctionsPanel.setLayout(new GridLayout(auctionLog.getTreshold(),1));
+		//auctionsPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+	
+	///	auctionsPanel.add(new Label("sss"));
 		
-		
+		auctions = new ArrayList<Label>();
+		for(int i = 0 ; i < auctionLog.getTreshold(); i++){
+			Label l = new Label("");
+			auctions.add(l);
+			auctionsPanel.add(l);
+		}
+		add(auctionsPanel);
 	}
 	@Override
 	public void update() {
-		auctionsPanel = new JPanel();
-		auctionsPanel.setPreferredSize(new Dimension(200,200));
-		auctionsPanel.setLayout(new BorderLayout(10,1));
+		
+		//auctionsPanel.removeAll();
+		auctionsPanel.add(new Label("TEST"));
+		auctionsPanel.repaint();
 		int i = 0;
+		System.out.println(auctionLog.size());
 		for(IAuction auction : auctionLog)
 		{
-			JPanel aucPanel = new JPanel();
-			aucPanel.add(new Label(auction.getSeller().toString()));
-			auctionsPanel.add(aucPanel);
-			if(i >= 10)
+			
+			
+			auctions.get(i).setText(("Sold " + auction.getQuantity() + "E  for " + 
+													auction.getResult().getPrice() + 
+													" from " + auction.getSeller().toString() + " to " +
+													auction.getResult().getBuyer() ));
+		
+		
+			
+			if(i >= auctionLog.getTreshold() - 1)
 			{
 				continue;
 			}
 			i++;
 		}
+		
 	}
 
 }
