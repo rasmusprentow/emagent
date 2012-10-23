@@ -1,6 +1,7 @@
 package emagent.environment;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import emagent.agent.brp.*;
 import emagent.agent.IMarket;
@@ -15,7 +16,7 @@ public interface IEnvironment {
 	public abstract IMarket getMarket();
 	public abstract ArrayList<IProsumer> getProsumers();
 	public abstract ArrayList<IBrp> getBrps();
-	public abstract ArrayList<TickListener> getTickNotifiers();
+	public abstract Collection<TickListener> getTickNotifiers();
 
 	public int getStandardConsumationElectricityPrice();
 	int getStandardProductionElectricityPrice();
