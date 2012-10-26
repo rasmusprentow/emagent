@@ -37,7 +37,7 @@ public class DrawableBrp extends DrawableAgent {
 	@Override
 	public void update() {
 
-		money.setText("Cash: " + brp.getCurrentMonetaryBalance());
+		money.setText("Cash: " + brp.getCurrentMonetaryBalance()/1000 + "k");
 		electricity.setText("Electricity: " +brp.getCurrentElectricalBalance());
 		consumation.setText(formatTotalConsumption());
 	}
