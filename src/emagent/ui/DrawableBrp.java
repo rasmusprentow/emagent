@@ -52,11 +52,11 @@ public class DrawableBrp extends DrawableAgent {
 	{
 		if(brp.getTotalConsumption() < 0)
 		{
-			return "Prod.: " + Math.abs(brp.getTotalConsumption());
+			return "Prod: " + Math.abs(brp.getTotalConsumption());
 		}
 		else
 		{
-			return "Cons.: " + brp.getTotalConsumption();
+			return "Cons: " + brp.getTotalConsumption();
 		}
 		
 		
