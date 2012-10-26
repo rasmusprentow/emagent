@@ -11,8 +11,17 @@ public class FirstPriceSealedBidOneShotBiddingStrategy implements
 	@Override
 	public void  bidOnAuctions(AuctionList auctions, int monetaryBalance,
 			int electricalBalance, IBrp bidder) throws Exception {
+		
+		for(IAuction auction : auctions)
+		{
+			if(auction.getLeadingBidder() == bidder)
+			{
+				monetaryBalance -= auction.getMinimumBidPrice();
+				electricalBalance += auction.getQuantity();
+			}
+		}
 		if(electricalBalance < 0 && monetaryBalance > 0)
-		{	
+		{
 			auctions.sortByQuantity(false);
 			for(IAuction auction : auctions)
 			{

@@ -12,7 +12,7 @@ public class PowerFine implements IFine {
 	
 	public int amount()
 	{
-		return (int) Math.pow(pricePerImbalance*imbalance, 1.1);
+		return (int) (pricePerImbalance*Math.pow(imbalance, 1.1));
 	}
 
 }

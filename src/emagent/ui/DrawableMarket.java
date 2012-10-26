@@ -50,7 +50,7 @@ public class DrawableMarket extends DrawableAgent {
 			Color color;
 			if(auction instanceof NewRoundAuction)
 			{
-				text = "Round " + Environment.getEnvironment().getTime();
+				text = " ------- Round ------- ";
 				color = Color.white;
 			} else 
 			{
