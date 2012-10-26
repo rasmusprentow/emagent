@@ -3,14 +3,14 @@ package emagent.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
+
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+
 
 import emagent.agent.IMarket;
 import emagent.auction.*;
