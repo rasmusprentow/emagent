@@ -19,4 +19,6 @@ public interface IAuction {
 	public boolean bidAdded();
 	public int getMaximumBidPrice();
 	public AuctionType getAuctionType();
+	public IBrp getLeadingBidder();
+
 }

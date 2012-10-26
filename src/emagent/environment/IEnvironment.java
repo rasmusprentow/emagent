@@ -6,6 +6,7 @@ import java.util.Collection;
 import emagent.agent.brp.*;
 import emagent.agent.IMarket;
 import emagent.agent.IProsumer;
+import emagent.agent.ITso;
 import emagent.ui.TickListener;
 
 public interface IEnvironment {
@@ -22,4 +23,5 @@ public interface IEnvironment {
 	int getStandardProductionElectricityPrice();
 	public int getStandardFineElectricityPrice();
 	public int getPriceDifference();
+	public ITso getTso();
 }

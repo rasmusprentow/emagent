@@ -27,7 +27,7 @@ public class FirstPriceSealedBidOneShotBiddingStrategy implements
 				int bidPrice = auction.getMinimumBidPrice();
 				int randPrice =  (int) (Math.random()* Environment.getEnvironment().getPriceDifference()) * auction.getQuantity() + bidPrice;
 				
-				if(bidPrice <= monetaryBalance)
+				if(bidPrice/auction.getQuantity() <= privateValuation( - electricalBalance)/( - electricalBalance))
 				{
 					if(-electricalBalance >= auction.getQuantity())
 					{
@@ -39,6 +39,10 @@ public class FirstPriceSealedBidOneShotBiddingStrategy implements
 				}
 			}
 		}
+	}
+
+	private int privateValuation(int electricalBalance) {
+		Environment.getEnvironment().getTso().getFineSize(electricalBalance);
 	}
 
 }
