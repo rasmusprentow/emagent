@@ -1,7 +1,7 @@
 package emagent.agent;
 
 import emagent.environment.Environment;
-import emagent.environment.ExponentialFine;
+import emagent.environment.PowerFine;
 import emagent.agent.brp.*;
 
 
@@ -25,7 +25,7 @@ public class Tso extends AbstractAgent implements ITso {
 			int imbalance = brp.getTotalConsumption();
 			if(imbalance > 0)
 			{
-				brp.notifyFine(new ExponentialFine(Environment.getEnvironment().getStandardFineElectricityPrice(), imbalance));
+				brp.notifyFine(new PowerFine(Environment.getEnvironment().getStandardFineElectricityPrice(), imbalance));
 			}
 		}
 	}
