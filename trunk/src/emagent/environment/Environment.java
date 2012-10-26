@@ -113,7 +113,7 @@ public class Environment implements IEnvironment {
 
 	@Override
 	public int getStandardFineElectricityPrice() {
-		return (int) (getStandardElectricityPrice() * 2);
+		return (int) (getStandardElectricityPrice() * 1.5);
 	}
 
 	@Override
