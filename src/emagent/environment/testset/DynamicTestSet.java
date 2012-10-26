@@ -27,8 +27,8 @@ public class DynamicTestSet extends AbstractTestSet {
 		IProsumer powerplant50 = new ConstantProsumer(-50);
 		IProsumer solarCell2 = new SinusProsumer(-20, 0, 0);
 		IProsumer city = new ConstantProsumer(200);
-		IProsumer town = new SinusProsumer(-70, 0, 60);
-		IProsumer village = new SinusProsumer(-40, 0, 20);
+		IProsumer town = new SinusProsumer(70, 0, 60);
+		IProsumer village = new SinusProsumer(40, 0, 20);
 		IProsumer powerplant150 = new ConstantProsumer(-150);
 		
 		prosumers.add(powerplant100);
