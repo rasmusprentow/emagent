@@ -1,7 +1,5 @@
 package emagent.agent.brp;
 
-import java.util.Collections;
-
 import emagent.auction.AuctionList;
 import emagent.auction.Bid;
 import emagent.auction.IAuction;
