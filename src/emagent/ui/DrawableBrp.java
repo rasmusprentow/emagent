@@ -39,7 +39,7 @@ public class DrawableBrp extends DrawableAgent {
 
 		money.setText("Cash: " + brp.getCurrentMonetaryBalance());
 		electricity.setText("Electricity: " +brp.getCurrentElectricalBalance());
-		consumation.setText("Cons.: " + brp.getTotalConsumption());
+		consumation.setText(formatTotalConsumption());
 	}
 	
 	
@@ -48,5 +48,18 @@ public class DrawableBrp extends DrawableAgent {
 		return this.brp.toString();
 	}
 	
+	private String formatTotalConsumption()
+	{
+		if(brp.getTotalConsumption() < 0)
+		{
+			return "Prod.: " + Math.abs(brp.getTotalConsumption());
+		}
+		else
+		{
+			return "Cons.: " + brp.getTotalConsumption();
+		}
+		
+		
+	}
 	
 }
