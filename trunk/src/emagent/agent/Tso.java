@@ -1,7 +1,6 @@
 package emagent.agent;
 
 import emagent.environment.Environment;
-import emagent.environment.LinearFine;
 import emagent.environment.PowerFine;
 import emagent.agent.brp.*;
 

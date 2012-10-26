@@ -26,12 +26,14 @@ public class EmagentPanel extends JPanel implements TickListener{
 	private JPanel topPanel;
 	private Label totalConsumptionLabel;
 	static   String TOTAL_CONSUMATION_STRING = "TotalConsumption: ";
+	static   String TOTAL_MONETARY_STRING = "TotalMoney: ";
 	private Label timeLabel;
 	private ArrayList<DrawableAgent> drawableAgents = null;
 	private  JPanel brpsPanel;
 	private  JPanel prosumersPanel;
 	private DrawableMarket market;
 	private Label totalImbalanceLabel;
+	private Label totalMoneyLabel;
 	public EmagentPanel()
 	{
 		this.setLayout( new GridLayout(1,3) );
@@ -51,10 +53,12 @@ public class EmagentPanel extends JPanel implements TickListener{
 		
 		totalConsumptionLabel = new Label(TOTAL_CONSUMATION_STRING + "0 MW");
 		totalImbalanceLabel = new Label(TOTAL_IMBALANCE_STRING + "0 MW");
+		totalMoneyLabel = new Label(TOTAL_MONETARY_STRING + "0");
 		topPanel = new JPanel();
-		topPanel.setLayout(new GridLayout(3,1));
+		topPanel.setLayout(new GridLayout(4,1));
 		topPanel.add(totalConsumptionLabel);
 		topPanel.add(totalImbalanceLabel);
+		topPanel.add(totalMoneyLabel);
 		timeLabel = new Label("Tick: XXXXXXXXXXXXXXX");
 		topPanel.add(timeLabel);
 		topPanel.setBackground(Color.black);
@@ -107,6 +111,17 @@ public class EmagentPanel extends JPanel implements TickListener{
 		totalImbalanceLabel.setText(TOTAL_IMBALANCE_STRING + total + " MW");
 	}
 	
+	
+	public void updateTotalMoney()
+	{
+		int total = 0;
+		for(IBrp brp : Environment.getEnvironment().getBrps())
+		{
+			total += (brp.getCurrentMonetaryBalance());
+		}
+		totalMoneyLabel.setText(TOTAL_MONETARY_STRING + total + " ");
+	}
+	
 	/*
 	public void updateTotalMonetaryBalance()
 	{
@@ -145,7 +160,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 		
 		}
 		
-	
+		updateTotalMoney();
 		updateTotalEnergyImbalance();
 		updateTotalEnergyConsumation();
 		timeLabel.setText("Day: " + time/24 + " Hour: " + time % 24);
