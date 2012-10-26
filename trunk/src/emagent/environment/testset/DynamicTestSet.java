@@ -11,7 +11,7 @@ public class DynamicTestSet extends AbstractTestSet {
 		market = new FirstPriceSealedBidOneShotMarket();
 		tso = new Tso(market);
 		
-		IBrp brpa = createBrp("A", env.getStandardConsumationElectricityPrice()*1500);
+		IBrp brpa = createBrp("A",env.getStandardConsumationElectricityPrice()*1500);
 		IBrp brpb = createBrp("B",env.getStandardConsumationElectricityPrice()*1500);
 		IBrp brpc = createBrp("C",env.getStandardConsumationElectricityPrice()*1500);
 		IBrp brpd = createBrp("D",env.getStandardConsumationElectricityPrice()*1500);
