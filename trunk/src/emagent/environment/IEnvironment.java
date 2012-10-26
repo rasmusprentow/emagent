@@ -24,4 +24,6 @@ public interface IEnvironment {
 	public int getStandardFineElectricityPrice();
 	public int getPriceDifference();
 	public ITso getTso();
+	public abstract void setSleepTime(long sleepTime);
+	public abstract long getSleepTime();
 }
