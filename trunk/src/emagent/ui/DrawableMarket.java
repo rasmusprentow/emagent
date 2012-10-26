@@ -45,9 +45,7 @@ public class DrawableMarket extends DrawableAgent {
 		auctionsPanel.setForeground(Color.YELLOW);
 		auctionsPanel.setPreferredSize(new Dimension(200,200));
 		auctionsPanel.setLayout(new GridLayout(auctionLog.getTreshold(),1));
-		//auctionsPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 	
-	///	auctionsPanel.add(new Label("sss"));
 		
 		auctions = new ArrayList<Label>();
 		for(int i = 0 ; i < auctionLog.getTreshold(); i++){
@@ -60,11 +58,9 @@ public class DrawableMarket extends DrawableAgent {
 	@Override
 	public void update() {
 		
-		//auctionsPanel.removeAll();
-		auctionsPanel.add(new Label("TEST"));
-		auctionsPanel.repaint();
+
 		int i = 0;
-		System.out.println(auctionLog.size());
+
 		for(IAuction auction : auctionLog)
 		{
 			
@@ -80,7 +76,7 @@ public class DrawableMarket extends DrawableAgent {
 			auctions.get(i).setForeground(color);
 			if(i >= auctionLog.getTreshold() - 1)
 			{
-				continue;
+				break;
 			}
 			i++;
 		}

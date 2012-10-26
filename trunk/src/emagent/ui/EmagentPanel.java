@@ -19,6 +19,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final String TOTAL_IMBALANCE_STRING = "TotalImbalance: ";
 	private JPanel center;
 	private JPanel leftSide;
 	private JPanel rightSide;
@@ -29,6 +30,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 	private  JPanel brpsPanel;
 	private  JPanel prosumersPanel;
 	private DrawableMarket market;
+	private Label totalImbalanceLabel;
 	public EmagentPanel()
 	{
 		this.setLayout( new GridLayout(1,3) );
@@ -47,8 +49,9 @@ public class EmagentPanel extends JPanel implements TickListener{
 		center.add(new Label("BRPs"), BorderLayout.NORTH);
 		
 		totalConsumptionLabel = new Label(TOTAL_CONSUMATION_STRING + "0 MW");
+		totalImbalanceLabel = new Label(TOTAL_IMBALANCE_STRING + "0 MW");
 		leftSide.add(totalConsumptionLabel);
-		
+		leftSide.add(totalImbalanceLabel);
 		timeLabel = new Label("Tick: XXXXXXXXXXXXXXX");
 		leftSide.add(timeLabel);
 		
@@ -86,6 +89,16 @@ public class EmagentPanel extends JPanel implements TickListener{
 			total += pro.getTotalConsumption();
 		}
 		totalConsumptionLabel.setText(TOTAL_CONSUMATION_STRING + total + " MW");
+	}
+	
+	public void updateTotalEnergyImbalance()
+	{
+		int total = 0;
+		for(IBrp brp : Environment.getEnvironment().getBrps())
+		{
+			total += Math.abs(brp.getTotalConsumption());
+		}
+		totalImbalanceLabel.setText(TOTAL_IMBALANCE_STRING + total + " MW");
 	}
 	
 	/*
