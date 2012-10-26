@@ -38,7 +38,7 @@ public class Environment implements IEnvironment {
 	
 	private Environment()
 	{
-		testSet = new DynamicTestSet();
+		testSet = new MoreDynamicTestSet();
 		tickNotifiers = new ArrayList<TickListener>();
 	}
 	
