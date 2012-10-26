@@ -45,12 +45,6 @@ public class EmagentPanel extends JPanel implements TickListener{
 	private Label totalMoneyLabel;
 	public EmagentPanel()
 	{
-		try {
-			file = new FileWriter("avg.csv");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		this.setLayout( new GridLayout(1,3) );
 		leftSide = new JPanel();
 		leftSide.setLayout(new BorderLayout());
@@ -106,6 +100,15 @@ public class EmagentPanel extends JPanel implements TickListener{
 		brpsPanel.setForeground(Color.yellow);
 		prosumersPanel.setBackground(Color.black);
 		prosumersPanel.setForeground(Color.yellow);
+		
+		//Clear file
+
+		try {
+			file = new FileWriter("avg.csv",false);
+			file.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void updateTotalEnergyConsumation()
@@ -132,20 +135,15 @@ public class EmagentPanel extends JPanel implements TickListener{
 	{
 		int total = 0;
 		int count = 0;
-		boolean newRoundFound = false;
 		for(IAuction auction : Environment.getEnvironment().getMarket().getAuctionHistory())
 		{
 			if(auction instanceof NewRoundAuction)
 			{
-				if(newRoundFound || true)
-				{
-					break;
-				}
-				newRoundFound = true;
+				break;
 			}
 			else
 			{
-				if(!(auction instanceof NotSoldResult))
+				if(!(auction.getResult() instanceof NotSoldResult))
 				{
 					total += auction.getResult().getPrice();
 					count += auction.getQuantity();
@@ -156,7 +154,9 @@ public class EmagentPanel extends JPanel implements TickListener{
 		{
 			averageEnergyPricelabel.setText(AVERAGE_ENERGY_PRICE_STRING + total/count);
 			try {
-				file.write(Environment.getEnvironment().getTime() + "," + total+","+count+"\n");
+				file = new FileWriter("avg.csv",true);
+				file.write(Environment.getEnvironment().getTime() + "," + total+","+count+","+  total/count+"\n");
+				file.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
