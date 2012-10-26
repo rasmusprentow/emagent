@@ -20,6 +20,10 @@ public class FirstPriceSealedBidOneShotBiddingStrategy implements
 				{
 					break;
 				}
+				if(auction.getLeadingBidder() == bidder)
+				{
+					continue;
+				}
 				int bidPrice = auction.getMinimumBidPrice();
 				int randPrice =  (int) (Math.random()* Environment.getEnvironment().getPriceDifference()) * auction.getQuantity() + bidPrice;
 				

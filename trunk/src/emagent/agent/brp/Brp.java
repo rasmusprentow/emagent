@@ -28,9 +28,15 @@ public class Brp extends AbstractAgent implements IBrp{
 		sellingStrategies.put(
 				new AuctionType(BidPrice.FIRST, BidType.SEALED, BidOrder.ONE_SHOT), 
 				new FirstPriceSealedBidOneShotSellingStrategy());
+		sellingStrategies.put(
+				new AuctionType(BidPrice.FIRST, BidType.OPEN_CRY, BidOrder.ASCENDING), 
+				new FirstPriceSealedBidOneShotSellingStrategy());
 		biddingStrategies = new HashMap<AuctionType, IBrpBiddingStrategy>();
 		biddingStrategies.put(
 				new AuctionType(BidPrice.FIRST, BidType.SEALED, BidOrder.ONE_SHOT), 
+				new FirstPriceSealedBidOneShotBiddingStrategy());
+		biddingStrategies.put(
+				new AuctionType(BidPrice.FIRST,  BidType.OPEN_CRY, BidOrder.ASCENDING), 
 				new FirstPriceSealedBidOneShotBiddingStrategy());
 	}
 	
