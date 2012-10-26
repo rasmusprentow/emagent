@@ -9,7 +9,7 @@ public class AuctionLog extends LinkedList<IAuction> {
 	 * 
 	 */
 	private static final long serialVersionUID = 2417290462976212388L;
-	private int treshold = 40;
+	private int treshold = 45;
 	
 	public int getTreshold() {
 		return treshold;
