@@ -102,7 +102,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 		int total = 0;
 		for(IBrp brp : Environment.getEnvironment().getBrps())
 		{
-			total += Math.abs(brp.getTotalConsumption());
+			total += Math.abs(brp.getCurrentElectricalBalance());
 		}
 		totalImbalanceLabel.setText(TOTAL_IMBALANCE_STRING + total + " MW");
 	}
