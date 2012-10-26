@@ -73,11 +73,11 @@ public class DrawableMarket extends DrawableAgent {
 													auction.getResult().getPrice() + 
 													" from " + auction.getSeller().toString() + " to " +
 													auction.getResult().getBuyer() ));
-			
+			Color color = Color.green;
 			if(auction.getResult().getBuyer() == null){
-				auctions.get(i).setForeground(Color.RED);
+				color = Color.RED;
 			}
-			
+			auctions.get(i).setForeground(color);
 			if(i >= auctionLog.getTreshold() - 1)
 			{
 				continue;
