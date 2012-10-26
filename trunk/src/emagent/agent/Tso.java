@@ -25,8 +25,15 @@ public class Tso extends AbstractAgent implements ITso {
 			int imbalance = brp.getTotalConsumption();
 			if(imbalance > 0)
 			{
-				brp.notifyFine(new PowerFine(Environment.getEnvironment().getStandardFineElectricityPrice(), imbalance));
+				brp.notifyFine(new PowerFine(Environment.getEnvironment().getStandardFineElectricityPrice(),imbalance));
 			}
 		}
 	}
+
+	@Override
+	public int getFineSize(int imbalance) {
+		return new PowerFine(Environment.getEnvironment().getStandardFineElectricityPrice(), imbalance).amount();
+	}
+	
+	
 }
