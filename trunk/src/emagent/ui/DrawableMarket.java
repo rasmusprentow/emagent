@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 
 import emagent.agent.IMarket;
 import emagent.auction.*;
-import emagent.environment.Environment;
 
 public class DrawableMarket extends DrawableAgent {
 
