@@ -12,7 +12,7 @@ public class FirstPriceSealedBidOneShotSellingStrategy implements
 		
 		while(energyBalance > 0)
 		{
-			int curBid = Math.min(energyBalance/2+1,energyBalance);
+			int curBid = Math.min(energyBalance/3+1,energyBalance);
 			res.add(AuctionFactory.getFactory().create(
 					auctionType, 
 					curBid, 

@@ -1,5 +1,7 @@
 package emagent.agent.brp;
 
+import java.util.Collections;
+
 import emagent.auction.AuctionList;
 import emagent.auction.Bid;
 import emagent.auction.IAuction;
@@ -20,9 +22,10 @@ public class FirstPriceSealedBidOneShotBiddingStrategy implements
 				electricalBalance += auction.getQuantity();
 			}
 		}
-		if(electricalBalance < 0 && monetaryBalance > 0)
+		if(electricalBalance < 0 ) //&& monetaryBalance > 0
 		{
-			auctions.sortByQuantity(false);
+			auctions.sortByPrice(false);
+		
 			for(IAuction auction : auctions)
 			{
 				if(electricalBalance >= 0)
@@ -51,7 +54,7 @@ public class FirstPriceSealedBidOneShotBiddingStrategy implements
 	}
 
 	private int privateValuation(int electricalBalance) {
-		return Environment.getEnvironment().getTso().getFineSize(electricalBalance);
+		return (int)(Environment.getEnvironment().getTso().getFineSize(electricalBalance) * 0.9);
 	}
 
 }
