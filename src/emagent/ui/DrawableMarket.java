@@ -26,8 +26,40 @@ public class DrawableMarket extends DrawableAgent {
 	private ArrayList<Label> auctions;
 	private AuctionLog auctionLog;
 	
-	public DrawableMarket(IMarket market) {
+	public DrawableMarket() {
 		super();
+	
+	}
+	@Override
+	public void update() {
+		if(market == null) return;
+		
+		int i = 0;
+
+		for(IAuction auction : auctionLog)
+		{
+			
+			
+			auctions.get(i).setText(("Sold " + auction.getQuantity() + "E \t for " + 
+													auction.getResult().getPrice() + 
+													" \t from " + auction.getSeller().toString() + " to " +
+													auction.getResult().getBuyer() +
+													" each: " + auction.getResult().getPrice()/auction.getQuantity()));
+			Color color = Color.green;
+			if(auction.getResult().getBuyer() == null){
+				color = Color.RED;
+			}
+			auctions.get(i).setForeground(color);
+			if(i >= auctionLog.getTreshold() - 1)
+			{
+				break;
+			}
+			i++;
+		}
+		
+	}
+	public void setEnvironment(IMarket market) {
+		
 		
 		setPreferredSize(new Dimension(199,700));
 		setLayout(new GridLayout(4,1));
@@ -54,33 +86,6 @@ public class DrawableMarket extends DrawableAgent {
 			auctionsPanel.add(l);
 		}
 		add(auctionsPanel);
-	}
-	@Override
-	public void update() {
-		
-
-		int i = 0;
-
-		for(IAuction auction : auctionLog)
-		{
-			
-			
-			auctions.get(i).setText(("Sold " + auction.getQuantity() + "E  for " + 
-													auction.getResult().getPrice() + 
-													" from " + auction.getSeller().toString() + " to " +
-													auction.getResult().getBuyer() ));
-			Color color = Color.green;
-			if(auction.getResult().getBuyer() == null){
-				color = Color.RED;
-			}
-			auctions.get(i).setForeground(color);
-			if(i >= auctionLog.getTreshold() - 1)
-			{
-				break;
-			}
-			i++;
-		}
-		
 	}
 
 }

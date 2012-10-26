@@ -23,6 +23,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 	private JPanel center;
 	private JPanel leftSide;
 	private JPanel rightSide;
+	private JPanel topPanel;
 	private Label totalConsumptionLabel;
 	static   String TOTAL_CONSUMATION_STRING = "TotalConsumption: ";
 	private Label timeLabel;
@@ -35,7 +36,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 	{
 		this.setLayout( new GridLayout(1,3) );
 		leftSide = new JPanel();
-	//	leftSide.setLayout(new GridLayout(3,1));
+		leftSide.setLayout(new BorderLayout());
 		leftSide.setSize(this.getWidth()/2, this.getWidth());
 		this.add(leftSide);
 		center = new JPanel();
@@ -50,12 +51,17 @@ public class EmagentPanel extends JPanel implements TickListener{
 		
 		totalConsumptionLabel = new Label(TOTAL_CONSUMATION_STRING + "0 MW");
 		totalImbalanceLabel = new Label(TOTAL_IMBALANCE_STRING + "0 MW");
-		leftSide.add(totalConsumptionLabel);
-		leftSide.add(totalImbalanceLabel);
+		topPanel = new JPanel();
+		topPanel.setLayout(new GridLayout(3,1));
+		topPanel.add(totalConsumptionLabel);
+		topPanel.add(totalImbalanceLabel);
 		timeLabel = new Label("Tick: XXXXXXXXXXXXXXX");
-		leftSide.add(timeLabel);
-		
-		
+		topPanel.add(timeLabel);
+		topPanel.setBackground(Color.black);
+		topPanel.setForeground(Color.yellow);
+		leftSide.add(topPanel, BorderLayout.NORTH);
+		market = new DrawableMarket();
+		leftSide.add(market, BorderLayout.CENTER);
 		timeLabel.setSize(100,timeLabel.getHeight());
 		
 		brpsPanel = new JPanel();
@@ -135,12 +141,12 @@ public class EmagentPanel extends JPanel implements TickListener{
 				da.setBorder(BorderFactory.createEmptyBorder());
 			}
 			
-			market = new DrawableMarket(Environment.getEnvironment().getMarket());
-			leftSide.add(market);
+			market.setEnvironment(Environment.getEnvironment().getMarket());
+		
 		}
 		
 	
-		
+		updateTotalEnergyImbalance();
 		updateTotalEnergyConsumation();
 		timeLabel.setText("Day: " + time/24 + " Hour: " + time % 24);
 	}
