@@ -4,12 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Label;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import emagent.agent.brp.*;
@@ -18,6 +20,7 @@ import emagent.auction.IAuction;
 import emagent.auction.NewRoundAuction;
 import emagent.auction.NotSoldResult;
 import emagent.environment.Environment;
+import emagent.ui.listeners.PauseListener;
 
 public class EmagentPanel extends JPanel implements TickListener{
 	
@@ -43,6 +46,9 @@ public class EmagentPanel extends JPanel implements TickListener{
 	private Label averageEnergyPricelabel;
 	private FileWriter file;
 	private Label totalMoneyLabel;
+	
+	private JButton pauseBtn;
+	private PauseListener pauseListener;
 	public EmagentPanel()
 	{
 		this.setLayout( new GridLayout(1,3) );
@@ -100,15 +106,23 @@ public class EmagentPanel extends JPanel implements TickListener{
 		brpsPanel.setForeground(Color.yellow);
 		prosumersPanel.setBackground(Color.black);
 		prosumersPanel.setForeground(Color.yellow);
+
+		pauseBtn = new JButton("Pause");
+		pauseListener = new PauseListener();
+		pauseBtn.addActionListener(pauseListener);
+		JPanel btnPanel = new JPanel();
+		btnPanel.setBackground(Color.black);
+		rightSide.add(btnPanel, BorderLayout.SOUTH);
+		btnPanel.add(pauseBtn);
 		
 		//Clear file
-
 		try {
 			file = new FileWriter("avg.csv",false);
 			file.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 	
 	public void updateTotalEnergyConsumation()
@@ -187,7 +201,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 	
 	
 	@Override
-	public void notifyTick(int time) {
+	public void notifyTick(int time) throws Exception {
 		if(drawableAgents == null)
 		{
 			
@@ -210,12 +224,13 @@ public class EmagentPanel extends JPanel implements TickListener{
 			market.setEnvironment(Environment.getEnvironment().getMarket());
 		
 		}
-		
+		while(pauseListener.isPaused()) Thread.sleep(10);
 		updateTotalMoney();
 		updateTotalEnergyImbalance();
 		updateTotalEnergyConsumation();
 		updateAverageEnergyPrice();
 		timeLabel.setText("Day: " + time/24 + " Hour: " + time % 24);
+		
 	}
 
 
