@@ -15,6 +15,17 @@ public class Environment implements IEnvironment {
 	private ITestSet testSet;
 	protected ArrayList<TickListener> tickNotifiers;
 	private int standardElectricityPrice = 1000;
+	private long sleepTime = 500;
+
+	@Override
+	public long getSleepTime() {
+		return sleepTime;
+	}
+
+	@Override
+	public void setSleepTime(long sleepTime) {
+		this.sleepTime = sleepTime;
+	}
 
 	public static IEnvironment getEnvironment()
 	{
@@ -81,7 +92,7 @@ public class Environment implements IEnvironment {
 			
 			getMarket().startRound();
 			getTso().checkBrps();
-			Thread.sleep(500);
+			Thread.sleep(sleepTime );
 		
 		}
 	}
