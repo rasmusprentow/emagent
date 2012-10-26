@@ -86,7 +86,7 @@ public class Environment implements IEnvironment {
 		}
 	}
 
-	private ITso getTso() {
+	public ITso getTso() {
 		return testSet.getTso();
 	}
 

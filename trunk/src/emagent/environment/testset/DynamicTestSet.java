@@ -8,7 +8,7 @@ public class DynamicTestSet extends AbstractTestSet {
 	@Override
 	public void setup(IEnvironment env) 
 	{
-		market = new FirstPriceSealedBidOneShotMarket();
+		market = new FirstPriceOpenCryAscendingMarket();
 		tso = new Tso(market);
 		
 		IBrp brpa = createBrp("A",env.getStandardConsumationElectricityPrice()*1500);

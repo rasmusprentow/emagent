@@ -8,7 +8,11 @@ public class AuctionFactory implements IAuctionFactory {
 	@Override
 	public IAuction create(AuctionType auctionType, int electricalAmount,
 			int startingPrice, IBrp seller) {
-		return new FirstPriceSealedBidOneShotAuction(electricalAmount, startingPrice, seller);
+		if(auctionType.getBidType() == BidType.OPEN_CRY){
+			return new FirstPriceOpenCryAscendingAuction(electricalAmount, startingPrice, seller);
+		} else {
+			return new FirstPriceSealedBidOneShotAuction(electricalAmount, startingPrice, seller);
+		}
 	}
 
 
