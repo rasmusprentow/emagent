@@ -49,6 +49,23 @@ public class AuctionList extends ArrayList<IAuction> {
 		return sortByQuantity(true);
 	}
 	
+	public AuctionList sortByPricePerQuantity(boolean ascending)
+	{
+		final int multiplyer = ascending ? 1 : -1;
+		Collections.sort(this, new Comparator<IAuction>() {
+			@Override
+			public int compare(IAuction o1, IAuction o2) {
+				return (o1.getMinimumBidPrice()/o1.getQuantity() - o2.getMinimumBidPrice()/o2.getQuantity()) * multiplyer;
+			}
+		});
+		return this;
+	}
+	
+	public AuctionList sortByPricePerQuantity()
+	{
+		return sortByPricePerQuantity(true);
+	}
+	
 	public boolean bidsAddedThisRound()
 	{
 		for(IAuction auction : this)
@@ -69,5 +86,13 @@ public class AuctionList extends ArrayList<IAuction> {
 		}
 	}
 	
-	
+	public int averagemarketPrice()
+	{
+		long counter = 0;
+		for(IAuction auction : this)
+		{
+			counter += auction.getMinimumBidPrice();
+		}
+		return (int) (counter/this.size());
+	}
 }

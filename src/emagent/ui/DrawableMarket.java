@@ -41,6 +41,7 @@ public class DrawableMarket extends DrawableAgent {
 		}
 		auctions.get(0).setText("New Round" + Environment.getEnvironment().getTime());
 	*/
+		
 		auctionLog.addFirst(new NewRoundAuction());
 		int i = 0;
 		for(IAuction auction : auctionLog)

@@ -22,7 +22,8 @@ public class FirstPriceSealedBidOneShotBiddingStrategy implements
 		}
 		if(electricalBalance < 0 ) //&& monetaryBalance > 0
 		{
-			auctions.sortByPrice(false);
+			//auctions.sortByPrice(false);
+			auctions.sortByPricePerQuantity();
 		
 			for(IAuction auction : auctions)
 			{

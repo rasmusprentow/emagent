@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Label;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -11,6 +14,9 @@ import javax.swing.JPanel;
 
 import emagent.agent.brp.*;
 import emagent.agent.IProsumer;
+import emagent.auction.IAuction;
+import emagent.auction.NewRoundAuction;
+import emagent.auction.NotSoldResult;
 import emagent.environment.Environment;
 
 public class EmagentPanel extends JPanel implements TickListener{
@@ -19,13 +25,14 @@ public class EmagentPanel extends JPanel implements TickListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final String TOTAL_IMBALANCE_STRING = "TotalImbalance: ";
+	private static final String TOTAL_IMBALANCE_STRING = "Total Imbalance: ";
 	private JPanel center;
 	private JPanel leftSide;
 	private JPanel rightSide;
 	private JPanel topPanel;
 	private Label totalConsumptionLabel;
-	static   String TOTAL_CONSUMATION_STRING = "TotalConsumption: ";
+	static   String TOTAL_CONSUMATION_STRING = "Total Consumption: ";
+	private String AVERAGE_ENERGY_PRICE_STRING = "Average Energy Price: ";
 	static   String TOTAL_MONETARY_STRING = "TotalMoney: ";
 	private Label timeLabel;
 	private ArrayList<DrawableAgent> drawableAgents = null;
@@ -33,9 +40,17 @@ public class EmagentPanel extends JPanel implements TickListener{
 	private  JPanel prosumersPanel;
 	private DrawableMarket market;
 	private Label totalImbalanceLabel;
+	private Label averageEnergyPricelabel;
+	private FileWriter file;
 	private Label totalMoneyLabel;
 	public EmagentPanel()
 	{
+		try {
+			file = new FileWriter("avg.csv");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.setLayout( new GridLayout(1,3) );
 		leftSide = new JPanel();
 		leftSide.setLayout(new BorderLayout());
@@ -53,11 +68,13 @@ public class EmagentPanel extends JPanel implements TickListener{
 		
 		totalConsumptionLabel = new Label(TOTAL_CONSUMATION_STRING + "0 MW");
 		totalImbalanceLabel = new Label(TOTAL_IMBALANCE_STRING + "0 MW");
+		averageEnergyPricelabel = new Label(AVERAGE_ENERGY_PRICE_STRING + "0 MW");
 		totalMoneyLabel = new Label(TOTAL_MONETARY_STRING + "0");
 		topPanel = new JPanel();
 		topPanel.setLayout(new GridLayout(4,1));
 		topPanel.add(totalConsumptionLabel);
 		topPanel.add(totalImbalanceLabel);
+		topPanel.add(averageEnergyPricelabel);
 		topPanel.add(totalMoneyLabel);
 		timeLabel = new Label("Tick: XXXXXXXXXXXXXXX");
 		topPanel.add(timeLabel);
@@ -111,6 +128,40 @@ public class EmagentPanel extends JPanel implements TickListener{
 		totalImbalanceLabel.setText(TOTAL_IMBALANCE_STRING + total + " MW");
 	}
 	
+	public void updateAverageEnergyPrice()
+	{
+		int total = 0;
+		int count = 0;
+		boolean newRoundFound = false;
+		for(IAuction auction : Environment.getEnvironment().getMarket().getAuctionHistory())
+		{
+			if(auction instanceof NewRoundAuction)
+			{
+				if(newRoundFound)
+				{
+					break;
+				}
+				newRoundFound = true;
+			}
+			else
+			{
+				if(!(auction instanceof NotSoldResult))
+				{
+					total += auction.getResult().getPrice();
+					count += auction.getQuantity();
+				}
+			}
+		}
+		if(count > 0)
+		{
+			averageEnergyPricelabel.setText(AVERAGE_ENERGY_PRICE_STRING + total/count);
+			try {
+				file.write(Environment.getEnvironment().getTime() + "," + total+","+count+"\n");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	public void updateTotalMoney()
 	{
@@ -163,6 +214,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 		updateTotalMoney();
 		updateTotalEnergyImbalance();
 		updateTotalEnergyConsumation();
+		updateAverageEnergyPrice();
 		timeLabel.setText("Day: " + time/24 + " Hour: " + time % 24);
 	}
 
