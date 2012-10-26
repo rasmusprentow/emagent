@@ -42,7 +42,7 @@ public class FirstPriceSealedBidOneShotBiddingStrategy implements
 	}
 
 	private int privateValuation(int electricalBalance) {
-		Environment.getEnvironment().getTso().getFineSize(electricalBalance);
+		return Environment.getEnvironment().getTso().getFineSize(electricalBalance);
 	}
 
 }
