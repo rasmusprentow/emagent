@@ -42,8 +42,6 @@ public class Brp extends AbstractAgent implements IBrp{
 		return prosumers.addAll(c);
 	}
 
-
-
 	@Override
 	public void notifyTick(int newTick) {
 		this.electricalBalance = 0;
