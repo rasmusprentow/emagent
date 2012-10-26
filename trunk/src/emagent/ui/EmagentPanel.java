@@ -28,15 +28,21 @@ public class EmagentPanel extends JPanel implements TickListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final String TOTAL_IMBALANCE_STRING = "Total Imbalance: ";
 	private JPanel center;
 	private JPanel leftSide;
 	private JPanel rightSide;
 	private JPanel topPanel;
 	private Label totalConsumptionLabel;
-	static   String TOTAL_CONSUMATION_STRING = "Total Consumption: ";
-	private String AVERAGE_ENERGY_PRICE_STRING = "Average Energy Price: ";
-	static   String TOTAL_MONETARY_STRING = "TotalMoney: ";
+	private static final String TICK = "Tick: ";
+	private static final String TOTAL_MONETARY_STRING = "Total Money: ";
+	private static final String TOTAL_IMBALANCE_STRING = "Total Imbalance: ";
+	private static final String TOTAL_CONSUMATION_STRING = "Total Consumption: ";
+	private static final String AVERAGE_ENERGY_PRICE_STRING = "Average Energy Price: ";
+	private static final String CSV_HEADER = 	TICK + "," +
+												TOTAL_MONETARY_STRING + "," +
+												TOTAL_IMBALANCE_STRING + "," +
+												TOTAL_CONSUMATION_STRING + "," +
+												AVERAGE_ENERGY_PRICE_STRING + "\n";
 	private Label timeLabel;
 	private ArrayList<DrawableAgent> drawableAgents = null;
 	private  JPanel brpsPanel;
@@ -118,6 +124,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 		//Clear file
 		try {
 			file = new FileWriter("avg.csv",false);
+			file.write(CSV_HEADER);
 			file.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -133,6 +140,11 @@ public class EmagentPanel extends JPanel implements TickListener{
 			total += pro.getTotalConsumption();
 		}
 		totalConsumptionLabel.setText(TOTAL_CONSUMATION_STRING + total + " MW");
+		try {
+			file.write("," + total);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void updateTotalEnergyImbalance()
@@ -143,6 +155,11 @@ public class EmagentPanel extends JPanel implements TickListener{
 			total += Math.abs(brp.getCurrentElectricalBalance());
 		}
 		totalImbalanceLabel.setText(TOTAL_IMBALANCE_STRING + total + " MW");
+		try {
+			file.write("," + total);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void updateAverageEnergyPrice()
@@ -168,9 +185,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 		{
 			averageEnergyPricelabel.setText(AVERAGE_ENERGY_PRICE_STRING + total/count);
 			try {
-				file = new FileWriter("avg.csv",true);
-				file.write(Environment.getEnvironment().getTime() + "," + total+","+count+","+  total/count+"\n");
-				file.close();
+				file.write("," + total/count);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -185,6 +200,11 @@ public class EmagentPanel extends JPanel implements TickListener{
 			total += (brp.getCurrentMonetaryBalance());
 		}
 		totalMoneyLabel.setText(TOTAL_MONETARY_STRING + total + " ");
+		try {
+			file.write("," + total);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/*
@@ -224,11 +244,25 @@ public class EmagentPanel extends JPanel implements TickListener{
 			market.setEnvironment(Environment.getEnvironment().getMarket());
 		
 		}
+
 		while(pauseListener.isPaused()) Thread.sleep(10);
+		try {
+			file = new FileWriter("avg.csv",true);
+			file.write(Environment.getEnvironment().getTime() + "");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		updateTotalMoney();
 		updateTotalEnergyImbalance();
 		updateTotalEnergyConsumation();
 		updateAverageEnergyPrice();
+		try {
+			file.write("\n");
+			file.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		timeLabel.setText("Day: " + time/24 + " Hour: " + time % 24);
 		
 	}
