@@ -137,7 +137,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 		{
 			if(auction instanceof NewRoundAuction)
 			{
-				if(newRoundFound)
+				if(newRoundFound || true)
 				{
 					break;
 				}

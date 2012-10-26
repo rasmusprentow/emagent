@@ -11,7 +11,7 @@ public class DynamicTestSet extends AbstractTestSet {
 	{
 		market = new FirstPriceOpenCryAscendingMarket();
 		tso = new Tso(market);
-		env.setSleepTime(500);
+		env.setSleepTime(5);
 		IBrp brpa = createBrp("A",env.getStandardConsumationElectricityPrice()*15000);
 		IBrp brpb = createBrp("B",env.getStandardConsumationElectricityPrice()*15000);
 		IBrp brpc = createBrp("C",env.getStandardConsumationElectricityPrice()*15000);
