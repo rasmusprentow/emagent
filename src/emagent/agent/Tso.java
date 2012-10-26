@@ -1,8 +1,9 @@
 package emagent.agent;
 
 import emagent.environment.Environment;
+import emagent.environment.ExponentialFine;
 import emagent.agent.brp.*;
-import emagent.environment.LinearFine;
+
 
 public class Tso extends AbstractAgent implements ITso {
 	private IMarket market;
@@ -24,7 +25,7 @@ public class Tso extends AbstractAgent implements ITso {
 			int imbalance = brp.getTotalConsumption();
 			if(imbalance > 0)
 			{
-				brp.notifyFine(new LinearFine(Environment.getEnvironment().getStandardFineElectricityPrice(), imbalance));
+				brp.notifyFine(new ExponentialFine(Environment.getEnvironment().getStandardFineElectricityPrice(), imbalance));
 			}
 		}
 	}
