@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import emagent.agent.IMarket;
 import emagent.auction.*;
+import emagent.environment.Environment;
 
 public class DrawableMarket extends DrawableAgent {
 
@@ -34,22 +35,39 @@ public class DrawableMarket extends DrawableAgent {
 	public void update() {
 		if(market == null) return;
 		
+	
+		/*for(int i = auctionLog.getTreshold() - 1; i > 0; i--)
+		{
+			auctions.get(i).setText(auctions.get(i-1).getText());
+		}
+		auctions.get(0).setText("New Round" + Environment.getEnvironment().getTime());
+	*/
+		auctionLog.addFirst(new NewRoundAuction());
 		int i = 0;
-
 		for(IAuction auction : auctionLog)
 		{
-			
-			
-			auctions.get(i).setText(("Sold " + auction.getQuantity() + " MW  for " + 
-													auction.getResult().getPrice() + 
-													"  from " + auction.getSeller().toString() + " to " +
-													auction.getResult().getBuyer() +
-													" each: " + auction.getResult().getPrice()/auction.getQuantity()) + "");
-			Color color = Color.green;
-			if(auction.getResult().getBuyer() == null){
-				color = Color.RED;
+			String text;
+			Color color;
+			if(auction instanceof NewRoundAuction)
+			{
+				text = "Round " + Environment.getEnvironment().getTime();
+				color = Color.white;
+			} else 
+			{
+				text = "Sold " + auction.getQuantity() + " MW  for " + 
+						auction.getResult().getPrice() + 
+						"  from " + auction.getSeller().toString() + " to " +
+						auction.getResult().getBuyer() +
+						" each: " + auction.getResult().getPrice()/auction.getQuantity() + "";
+				color = Color.green;
+				if(auction.getResult().getBuyer() == null){
+					color = Color.RED;
+				}
+				
 			}
 			auctions.get(i).setForeground(color);
+			auctions.get(i).setText(text);
+		
 			if(i >= auctionLog.getTreshold() - 1)
 			{
 				break;
