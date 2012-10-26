@@ -21,12 +21,20 @@ public class FirstPriceOpenCryAscendingMarket extends Market implements IAgent {
 	protected Collection<IAuctionResult> bidRound(AuctionList auctions)
 			throws Exception {
 		Collection<IAuctionResult> results = new ArrayList<IAuctionResult>();
+		boolean newBids = true;
+		while(newBids)
+		{
+				for(IBrp brp : auctionListeners)
+				{
+					brp.notifyAuctionsAvailable(auctions);
+				}
+				
+				newBids = auctions.bidsAddedThisRound();
+				auctions.newBiddingRound();
+		}
 		for(IAuction auction : auctions)
 		{
-			for(IBrp brp : auctionListeners)
-			{
-				brp.notifyAuctionsAvailable(auctions);
-			}
+			
 			auction.close();
 			results.add(auction.getResult());
 		}
