@@ -20,7 +20,9 @@ import emagent.auction.IAuction;
 import emagent.auction.NewRoundAuction;
 import emagent.auction.NotSoldResult;
 import emagent.environment.Environment;
+import emagent.environment.IEnvironment;
 import emagent.ui.listeners.PauseListener;
+import emagent.ui.listeners.TimeListener;
 
 public class EmagentPanel extends JPanel implements TickListener{
 	
@@ -120,6 +122,17 @@ public class EmagentPanel extends JPanel implements TickListener{
 		btnPanel.setBackground(Color.black);
 		rightSide.add(btnPanel, BorderLayout.SOUTH);
 		btnPanel.add(pauseBtn);
+		
+		JButton downSleepBtn = new JButton("-");
+		JButton upSleepBtn = new JButton("+");
+		IEnvironment env;
+		TimeListener timeListener = new TimeListener(Environment.getEnvironment());
+		upSleepBtn.addActionListener(timeListener);
+		downSleepBtn.addActionListener(timeListener);
+		
+		btnPanel.add(upSleepBtn);
+		btnPanel.add(downSleepBtn);
+		
 		
 		//Clear file
 		try {
@@ -257,13 +270,17 @@ public class EmagentPanel extends JPanel implements TickListener{
 		updateTotalEnergyImbalance();
 		updateTotalEnergyConsumation();
 		updateAverageEnergyPrice();
+
+		timeLabel.setText("Day: " + time/24 + " Hour: " + time % 24 + " slp: " + Environment.getEnvironment().getSleepTime());
+
 		try {
 			file.write("\n");
 			file.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		timeLabel.setText("Day: " + time/24 + " Hour: " + time % 24);
+
+
 		
 	}
 
