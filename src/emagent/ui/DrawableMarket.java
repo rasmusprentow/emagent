@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import emagent.agent.IMarket;
 import emagent.auction.*;
+import emagent.ui.listeners.GuiDisListener;
 
 public class DrawableMarket extends DrawableAgent {
 
@@ -33,7 +34,10 @@ public class DrawableMarket extends DrawableAgent {
 	@Override
 	public void update() {
 		if(market == null) return;
-		
+		if(GuiDisListener.isDisabled())
+		{
+			return ;
+		}
 	
 		/*for(int i = auctionLog.getTreshold() - 1; i > 0; i--)
 		{

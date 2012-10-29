@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
 import emagent.agent.brp.*;
+import emagent.ui.listeners.GuiDisListener;
 
 public class DrawableBrp extends DrawableAgent {
 
@@ -36,7 +37,10 @@ public class DrawableBrp extends DrawableAgent {
 
 	@Override
 	public void update() {
-
+		if(GuiDisListener.isDisabled())
+		{
+			return ;
+		}
 		money.setText("Cash: " + brp.getCurrentMonetaryBalance()/1000 + "k");
 		electricity.setText("Electricity: " +brp.getCurrentElectricalBalance());
 		consumation.setText(formatTotalConsumption());
