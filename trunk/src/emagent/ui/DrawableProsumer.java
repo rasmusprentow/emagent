@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.Label;
 
 import emagent.agent.IProsumer;
+import emagent.ui.listeners.GuiDisListener;
 
 public class DrawableProsumer extends DrawableAgent {
 
@@ -33,6 +34,10 @@ public class DrawableProsumer extends DrawableAgent {
 	
 	@Override
 	public void update() {
+		if(GuiDisListener.isDisabled())
+		{
+			return ;
+		}
 		if(this.prosumer.getTotalConsumption() > 0)
 		{
 			consumation.setBackground(Color.RED);

@@ -21,6 +21,7 @@ import emagent.auction.NewRoundAuction;
 import emagent.auction.NotSoldResult;
 import emagent.environment.Environment;
 import emagent.environment.IEnvironment;
+import emagent.ui.listeners.GuiDisListener;
 import emagent.ui.listeners.PauseListener;
 import emagent.ui.listeners.TimeListener;
 
@@ -57,6 +58,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 	
 	private JButton pauseBtn;
 	private PauseListener pauseListener;
+	private GuiDisListener guiDisListener;
 	public EmagentPanel()
 	{
 		this.setLayout( new GridLayout(1,3) );
@@ -125,7 +127,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 		
 		JButton downSleepBtn = new JButton("-");
 		JButton upSleepBtn = new JButton("+");
-		IEnvironment env;
+
 		TimeListener timeListener = new TimeListener(Environment.getEnvironment());
 		upSleepBtn.addActionListener(timeListener);
 		downSleepBtn.addActionListener(timeListener);
@@ -133,7 +135,11 @@ public class EmagentPanel extends JPanel implements TickListener{
 		btnPanel.add(upSleepBtn);
 		btnPanel.add(downSleepBtn);
 		
-		
+		JButton guiDisBtn = new JButton("Disable Gui");
+
+		guiDisListener = new GuiDisListener();
+		guiDisBtn.addActionListener(guiDisListener);
+		btnPanel.add(guiDisBtn);
 		//Clear file
 		try {
 			file = new FileWriter("avg.csv",false);
@@ -257,7 +263,10 @@ public class EmagentPanel extends JPanel implements TickListener{
 			market.setEnvironment(Environment.getEnvironment().getMarket());
 		
 		}
-
+		if(GuiDisListener.isDisabled())
+		{
+			return ;
+		}
 		while(pauseListener.isPaused()) Thread.sleep(10);
 		try {
 			file = new FileWriter("avg.csv",true);
