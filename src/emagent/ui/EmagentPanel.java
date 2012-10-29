@@ -265,6 +265,8 @@ public class EmagentPanel extends JPanel implements TickListener{
 		}
 		if(GuiDisListener.isDisabled())
 		{
+			timeLabel.setText("Day: " + time/24 + " Hour: 0 slp: " + Environment.getEnvironment().getSleepTime());
+
 			return ;
 		}
 		while(pauseListener.isPaused()) Thread.sleep(10);
