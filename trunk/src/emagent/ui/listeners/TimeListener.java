@@ -19,7 +19,7 @@ public class TimeListener implements ActionListener {
 	
 		JButton btn = (JButton) arg0.getSource();
 	
-		if(btn.getText() == "+")
+		if(btn.getText() == "-")
 		{
 			if(environment.getSleepTime() == 0)
 			{
@@ -30,7 +30,7 @@ public class TimeListener implements ActionListener {
 			}else {
 				environment.setSleepTime(environment.getSleepTime()*2);
 			}
-		} else if(btn.getText() == "-")
+		} else if(btn.getText() == "+")
 		{
 			
 			
