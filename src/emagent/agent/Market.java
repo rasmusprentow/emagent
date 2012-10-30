@@ -48,15 +48,17 @@ public abstract class Market extends AbstractAgent implements IMarket {
 		
 		shuffle(auctions);
 		Collection<IAuctionResult> results = bidRound(auctions);
+		auctions.sortByPricePerQuantity(false);
 		auctionLog.addAllFirst(auctions); // For logging, they must be finished or else bad stuff will hape
 		handoutRound(results);
 		cleanUp();
 		Environment.getEnvironment().turnOver();
+		update();
 	}
 
 	@Override
 	public void notifyTick(long newTick) throws Exception {
-		update();
+		//update();
 	
 	}
 
