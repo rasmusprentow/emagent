@@ -51,14 +51,14 @@ public class LessDynamicTestSet extends AbstractTestSet {
 		createProsumer("Skanderborg", new ConstantProsumer(200), brpc);
 		createProsumer("Hjoering", new SinusProsumer(70, 0, 60), brpd);
 		createProsumer("Randers", new SinusProsumer(40, 0, 20), brpe);
-		createProsumer("powerplant150", new ConstantProsumer(-150), brpf);
+		createProsumer("powerplant 150", new ConstantProsumer(-150), brpf);
 		createProsumer("Viborg", new SinusProsumer(50, 0, 25), brpg);
 		createProsumer("windmill", windmill, brpg);
 		createProsumer("nuclear",  new NuclearProsumer(300,24*30,4), brph);
 		createProsumer("Aarhus", new ConstantProsumer(200), brph);
 		createProsumer("village3", new ConstantProsumer(100), brpi);
-		createProsumer("windmill2", windmill2, brpj);
-		createProsumer("nuclear2", new NuclearProsumer(300,24*30*12,24*2), brpj);
+		createProsumer("windmill 2", windmill2, brpj);
+		createProsumer("nuclear 2", new NuclearProsumer(300,24*30*12,24*2), brpj);
 		createProsumer("Aalborg", new ConstantProsumer(200), brpj);
 		createProsumer("Nørresundby", new ConstantProsumer(100), brpj);
 	}
