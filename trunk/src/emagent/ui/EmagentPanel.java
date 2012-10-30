@@ -35,57 +35,76 @@ public class EmagentPanel extends JPanel implements TickListener{
 	private JPanel leftSide;
 	private JPanel rightSide;
 	private JPanel topPanel;
-	private Label totalConsumptionLabel;
+	private JPanel brpsPanel;
+	private JPanel prosumersPanel;
+	
 	private static final String TICK = "Tick: ";
 	private static final String TOTAL_MONETARY_STRING = "Total Money: ";
 	private static final String TOTAL_IMBALANCE_STRING = "Total Imbalance: ";
-	private static final String TOTAL_CONSUMATION_STRING = "Total Consumption: ";
+	private static final String TOTAL_CONSUMATION_STRING = "Total Cons.: ";
 	private static final String AVERAGE_ENERGY_PRICE_STRING = "Average Energy Price: ";
 	private static final String CSV_HEADER = 	TICK + "," +
 												TOTAL_MONETARY_STRING + "," +
 												TOTAL_IMBALANCE_STRING + "," +
 												TOTAL_CONSUMATION_STRING + "," +
 												AVERAGE_ENERGY_PRICE_STRING + "\n";
-	private Label timeLabel;
+	
 	private ArrayList<DrawableAgent> drawableAgents = null;
-	private  JPanel brpsPanel;
-	private  JPanel prosumersPanel;
+	private int grandTotalConsumption = 0;
 	private DrawableMarket market;
+	
+	private FileWriter file;
+	
 	private Label totalImbalanceLabel;
 	private Label averageEnergyPricelabel;
-	private FileWriter file;
 	private Label totalMoneyLabel;
+	private Label timeLabel;
+	private Label totalConsumptionLabel;
 	
-	private JButton pauseBtn;
+	//private JButton pauseBtn;
 	private PauseListener pauseListener;
 	private GuiDisListener guiDisListener;
+	
+	
 	public EmagentPanel()
 	{
 		this.setLayout( new GridLayout(1,3) );
-		leftSide = new JPanel();
-		leftSide.setLayout(new BorderLayout());
-		leftSide.setSize(this.getWidth()/2, this.getWidth());
-		this.add(leftSide);
-		center = new JPanel();
-		
-		center.setLayout(new BorderLayout());
-		this.add(center);
-	//	leftSide.setLayout(new GridLayout(1,1))
-		
-		
-		
-		center.add(new Label("BRPs"), BorderLayout.NORTH);
 		
 		totalConsumptionLabel = new Label(TOTAL_CONSUMATION_STRING + "0 MW");
 		totalImbalanceLabel = new Label(TOTAL_IMBALANCE_STRING + "0 MW");
 		averageEnergyPricelabel = new Label(AVERAGE_ENERGY_PRICE_STRING + "0 MW");
 		totalMoneyLabel = new Label(TOTAL_MONETARY_STRING + "0");
+		
+		brpsPanel = new JPanel();
+		
+		rightSide = new JPanel();
+		rightSide.setLayout(new BorderLayout());
+		rightSide.add(new Label("Prosumers"), BorderLayout.NORTH);
+		
+		leftSide = new JPanel();
+		leftSide.setLayout(new BorderLayout());
+		leftSide.setSize(this.getWidth()/2, this.getWidth());
+	
+		center = new JPanel();
+		center.setLayout(new BorderLayout());	
+		center.add(new Label("BRPs"), BorderLayout.NORTH);
+		center.add(brpsPanel, BorderLayout.CENTER);
+		
+		this.add(leftSide);
+		this.add(center);
+		this.add(rightSide);
+		
 		topPanel = new JPanel();
 		topPanel.setLayout(new GridLayout(4,1));
 		topPanel.add(totalConsumptionLabel);
 		topPanel.add(totalImbalanceLabel);
 		topPanel.add(averageEnergyPricelabel);
 		topPanel.add(totalMoneyLabel);
+		
+		
+		
+		
+		
 		timeLabel = new Label("Tick: XXXXXXXXXXXXXXX");
 		topPanel.add(timeLabel);
 		topPanel.setBackground(Color.black);
@@ -95,13 +114,11 @@ public class EmagentPanel extends JPanel implements TickListener{
 		leftSide.add(market, BorderLayout.CENTER);
 		timeLabel.setSize(100,timeLabel.getHeight());
 		
-		brpsPanel = new JPanel();
-		center.add(brpsPanel, BorderLayout.CENTER);
+	
+	
 		
-		rightSide = new JPanel();
-		rightSide.setLayout(new BorderLayout());
-		rightSide.add(new Label("Prosumers"), BorderLayout.NORTH);
-		this.add(rightSide);
+	
+	
 		
 		prosumersPanel = new JPanel();
 		rightSide.add(prosumersPanel, BorderLayout.CENTER);
@@ -117,7 +134,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 		prosumersPanel.setBackground(Color.black);
 		prosumersPanel.setForeground(Color.yellow);
 
-		pauseBtn = new JButton("Pause");
+		JButton pauseBtn = new JButton("Pause");
 		pauseListener = new PauseListener();
 		pauseBtn.addActionListener(pauseListener);
 		JPanel btnPanel = new JPanel();
@@ -158,12 +175,19 @@ public class EmagentPanel extends JPanel implements TickListener{
 		{
 			total += pro.getTotalConsumption();
 		}
-		totalConsumptionLabel.setText(TOTAL_CONSUMATION_STRING + total + " MW");
+		grandTotalConsumption += total;
+		
 		try {
 			file.write("," + total);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		if(GuiDisListener.isDisabled())
+		{ return; }
+		totalConsumptionLabel.setText(TOTAL_CONSUMATION_STRING + total + " MW (" + grandTotalConsumption + ")" );
+	
+			
+		
 	}
 	
 	public void updateTotalEnergyImbalance()
@@ -173,12 +197,16 @@ public class EmagentPanel extends JPanel implements TickListener{
 		{
 			total += Math.abs(brp.getCurrentElectricalBalance());
 		}
-		totalImbalanceLabel.setText(TOTAL_IMBALANCE_STRING + total + " MW");
 		try {
 			file.write("," + total);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		if(GuiDisListener.isDisabled())
+		{ return; }
+		totalImbalanceLabel.setText(TOTAL_IMBALANCE_STRING + total + " MW");
+		
+		
 	}
 	
 	public void updateAverageEnergyPrice()
@@ -202,13 +230,19 @@ public class EmagentPanel extends JPanel implements TickListener{
 		}
 		if(count > 0)
 		{
-			averageEnergyPricelabel.setText(AVERAGE_ENERGY_PRICE_STRING + total/count);
 			try {
 				file.write("," + total/count);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			if(GuiDisListener.isDisabled())
+			{ return; }
+			averageEnergyPricelabel.setText(AVERAGE_ENERGY_PRICE_STRING + total/count);
+			
 		}
+		
+		
+		
 	}
 	
 	public void updateTotalMoney()
@@ -218,12 +252,16 @@ public class EmagentPanel extends JPanel implements TickListener{
 		{
 			total += (brp.getCurrentMonetaryBalance());
 		}
-		totalMoneyLabel.setText(TOTAL_MONETARY_STRING + total + " ");
 		try {
 			file.write("," + total);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		if(GuiDisListener.isDisabled())
+		{ return; }
+		totalMoneyLabel.setText(TOTAL_MONETARY_STRING + total + " ");
+		
+		
 	}
 	
 	/*
@@ -263,12 +301,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 			market.setEnvironment(Environment.getEnvironment().getMarket());
 		
 		}
-		if(GuiDisListener.isDisabled())
-		{
-			timeLabel.setText("Day: " + time/24 + " Hour: 0 slp: " + Environment.getEnvironment().getSleepTime());
-
-			return ;
-		}
+		
 		while(pauseListener.isPaused()) Thread.sleep(10);
 		try {
 			file = new FileWriter("avg.csv",true);
@@ -281,7 +314,12 @@ public class EmagentPanel extends JPanel implements TickListener{
 		updateTotalEnergyImbalance();
 		updateTotalEnergyConsumation();
 		updateAverageEnergyPrice();
+		if(GuiDisListener.isDisabled())
+		{
+			timeLabel.setText("Day: " + time/24 + " Hour: 0 slp: " + Environment.getEnvironment().getSleepTime());
 
+			return ;
+		}
 		timeLabel.setText("Day: " + time/24 + " Hour: " + time % 24 + " slp: " + Environment.getEnvironment().getSleepTime());
 
 		try {
