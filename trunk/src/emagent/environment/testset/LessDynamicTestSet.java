@@ -3,6 +3,7 @@ import emagent.agent.*;
 import emagent.agent.brp.IBrp;
 import emagent.agent.prosumer.ConstantProsumer;
 import emagent.agent.prosumer.IProsumer;
+import emagent.agent.prosumer.NuclearProsumer;
 import emagent.agent.prosumer.SinusProsumer;
 import emagent.agent.prosumer.VariableProsumer;
 
@@ -25,6 +26,7 @@ public class LessDynamicTestSet extends AbstractTestSet {
 		IBrp brpg = createBrp("G",env.getStandardConsumationElectricityPrice()*15000);
 		IBrp brph = createBrp("H",env.getStandardConsumationElectricityPrice()*15000);
 		IBrp brpi = createBrp("I",env.getStandardConsumationElectricityPrice()*15000);
+		IBrp brpj = createBrp("J",env.getStandardConsumationElectricityPrice()*15000);
 		
 		
 		IProsumer powerplant100 = new ConstantProsumer(-100);
@@ -39,35 +41,29 @@ public class LessDynamicTestSet extends AbstractTestSet {
 		IProsumer powerplant150 = new ConstantProsumer(-150);
 		IProsumer village2 = new SinusProsumer(50, 0, 25);
 		IProsumer windmill = new VariableProsumer(new I2IFunction(){
-		
 			@Override
 			public long map(long arg) {
 				return - (long) (Math.random()*50 + 25);
 			}
-			
-			
 		});
 		
 		IProsumer village3 = new ConstantProsumer(100);
 		IProsumer city2 = new ConstantProsumer(200);
-		IProsumer nuclear = new VariableProsumer(new I2IFunction(){
+		IProsumer nuclear = new NuclearProsumer(300,24*30,4);
+		
 
+		IProsumer windmill2 = new VariableProsumer(new I2IFunction(){
 			@Override
 			public long map(long arg) {
-				if(arg < 5)
-				{
-					return 10000;
-				} else 
-				{
-					return -300;
-				}
+				return - (long) (Math.random()*100);
 			}
-			
-			
 		});
+		IProsumer nuclear2 = new NuclearProsumer(300,24*30*12,24*2);
 	/*	IProsumer village3 = new SinusProsumer(40, 0, 20);
 		IProsumer nuclear = new VariableProsumer(100);
 		*/
+		IProsumer city3 = new ConstantProsumer(200);
+		IProsumer village4 = new ConstantProsumer(100);
 		prosumers.add(powerplant100);
 		prosumers.add(house);
 		prosumers.add(solarCell1);
@@ -83,6 +79,11 @@ public class LessDynamicTestSet extends AbstractTestSet {
 		prosumers.add(nuclear);
 		prosumers.add(city2);
 		prosumers.add(village3);
+
+		prosumers.add(nuclear2);
+		prosumers.add(windmill2);
+		prosumers.add(city3);
+		prosumers.add(village4);
 		
 		brpa.addProsumer(powerplant100);
 		brpa.addProsumer(house);
@@ -105,6 +106,11 @@ public class LessDynamicTestSet extends AbstractTestSet {
 		brph.addProsumer(city2);
 		
 		brpi.addProsumer(village3);
+		
+		brpj.addProsumer(windmill2);
+		brpj.addProsumer(nuclear2);
+		brpj.addProsumer(city3);
+		brpj.addProsumer(village4);
 	}
 
 }
