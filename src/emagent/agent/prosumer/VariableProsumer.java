@@ -22,12 +22,8 @@ public class VariableProsumer extends AbstractProsumer implements IProsumer {
 	public long getTotalConsumption() {
 		return totalConsumption;
 	}
-
+	
 	public String getName() {
 		return null;
-	}
-
-	
-
-
+}
 }

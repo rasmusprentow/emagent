@@ -59,9 +59,6 @@ public class LessDynamicTestSet extends AbstractTestSet {
 			}
 		});
 		IProsumer nuclear2 = new NuclearProsumer(300,24*30*12,24*2);
-	/*	IProsumer village3 = new SinusProsumer(40, 0, 20);
-		IProsumer nuclear = new VariableProsumer(100);
-		*/
 		IProsumer city3 = new ConstantProsumer(200);
 		IProsumer village4 = new ConstantProsumer(100);
 		prosumers.add(powerplant100);

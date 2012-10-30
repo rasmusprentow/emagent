@@ -17,6 +17,7 @@ public class NuclearProsumer extends AbstractProsumer implements IProsumer {
 		this.upPeriod = upPeriod;
 		this.downPeriod = downPeriod;
 		this.production = production;
+		up();
 	}
 
 	@Override
@@ -31,12 +32,23 @@ public class NuclearProsumer extends AbstractProsumer implements IProsumer {
 			multi = 1-multi;
 			if(multi == 0)
 			{
-				nextChange += downPeriod/2 + Math.random()*downPeriod;
+				down();
 			}
 			else
 			{
-				nextChange += upPeriod/2 + Math.random()*upPeriod;;
+				up();
 			}
 		}
+		update();
+	}
+	
+	private void down()
+	{
+		nextChange += downPeriod/2 + Math.random()*downPeriod;
+	}
+	
+	private void up()
+	{
+		nextChange += upPeriod/2 + Math.random()*upPeriod;;
 	}
 }
