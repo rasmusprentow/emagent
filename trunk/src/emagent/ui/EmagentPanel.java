@@ -302,7 +302,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 		
 		}
 		
-		while(pauseListener.isPaused()) Thread.sleep(10);
+	
 		try {
 			file = new FileWriter("avg.csv",true);
 			file.write(Environment.getEnvironment().getTime() + "");
@@ -329,7 +329,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 			e.printStackTrace();
 		}
 
-
+		while(pauseListener.isPaused()) Thread.sleep(10);
 		
 	}
 
