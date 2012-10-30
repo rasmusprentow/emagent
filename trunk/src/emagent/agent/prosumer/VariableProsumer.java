@@ -1,4 +1,6 @@
-package emagent.agent;
+package emagent.agent.prosumer;
+
+import emagent.agent.I2IFunction;
 
 public class VariableProsumer extends AbstractProsumer implements IProsumer {
 	
