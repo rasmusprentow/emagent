@@ -3,6 +3,7 @@ package emagent.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import java.awt.GridLayout;
 import java.awt.Label;
@@ -71,6 +72,7 @@ public class DrawableMarket extends DrawableAgent {
 			}
 			auctions.get(i).setForeground(color);
 			auctions.get(i).setText(text);
+			auctions.get(i).setFont(new Font("Default", Font.PLAIN,10));
 		
 			if(i >= auctionLog.getTreshold() - 1)
 			{

@@ -39,7 +39,8 @@ public class Environment implements IEnvironment {
 	
 	private Environment()
 	{
-		testSet = new LessDynamicTestSet();
+		//testSet = new LessDynamicTestSet();
+		testSet = new AlexTestSet();
 		tickNotifiers = new ArrayList<TickListener>();
 	}
 	
@@ -77,7 +78,7 @@ public class Environment implements IEnvironment {
 	public void start(TickListener tickListener) throws Exception {
 		testSet.setup(this);
 
-		tickNotifiers.add(tickListener);
+		//tickNotifiers.add(tickListener);
 		tickNotifiers.addAll(getProsumers());
 		tickNotifiers.addAll(getBrps());
 		tickNotifiers.add(getMarket());
@@ -93,6 +94,7 @@ public class Environment implements IEnvironment {
 			
 			getMarket().startRound();
 			getTso().checkBrps();
+			tickListener.notifyTick(getTime());
 			Thread.sleep(sleepTime );
 		
 		}
