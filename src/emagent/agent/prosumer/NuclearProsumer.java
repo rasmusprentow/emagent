@@ -1,6 +1,6 @@
 package emagent.agent.prosumer;
 
-public class NuclearProsumer extends AbstractProsumer {
+public class NuclearProsumer extends AbstractProsumer implements IProsumer {
 
 	private long nextChange = 0;
 	private int multi = 1;
