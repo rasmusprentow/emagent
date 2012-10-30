@@ -48,35 +48,22 @@ public class MoreDynamicTestSet extends AbstractTestSet {
 	/*	IProsumer village3 = new SinusProsumer(40, 0, 20);
 		IProsumer nuclear = new VariableProsumer(100);
 		*/
-		prosumers.add(powerplant100);
-		prosumers.add(house);
-		prosumers.add(solarCell1);
-		prosumers.add(farm);
-		prosumers.add(powerplant50);
-		prosumers.add(solarCell2);
-		prosumers.add(city);
-		prosumers.add(town);
-		prosumers.add(village);
-		prosumers.add(powerplant150);
-		prosumers.add(village2);
-		prosumers.add(windmill);
 		
-		brpa.addProsumer(powerplant100);
-		brpa.addProsumer(house);
+		createProsumer("powerplant 100", powerplant100, brpa);
+		createProsumer("house", house, brpa);
+		createProsumer("solarCell", solarCell1, brpb);
+		createProsumer("farm", farm, brpb);
+		createProsumer("powerplant50", powerplant50, brpc);
+		createProsumer("solarCell2", solarCell2, brpc);
+		createProsumer("city", city, brpc);
+		createProsumer("town", town, brpd);
+		createProsumer("village", village, brpe);
+		createProsumer("powerplant150", powerplant150, brpf);
+		createProsumer("village2", village2, brpg);
+		createProsumer("windmill", windmill, brpg);
 		
-		brpb.addProsumer(solarCell1);
-		brpb.addProsumer(farm);
 		
-		brpc.addProsumer(powerplant50);
-		brpc.addProsumer(solarCell2);
-		brpc.addProsumer(city);
-
-		brpd.addProsumer(town);
-		brpe.addProsumer(village);
-		brpf.addProsumer(powerplant150);
-		
-		brpg.addProsumer(village2);
-		brpg.addProsumer(windmill);
+	
 	}
 
 }
