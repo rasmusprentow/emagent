@@ -16,7 +16,7 @@ public class Environment implements IEnvironment {
 	private ITestSet testSet;
 	protected ArrayList<TickListener> tickNotifiers;
 	private int standardElectricityPrice = 1000;
-	private long sleepTime = 500;
+	private long sleepTime = 512;
 
 	@Override
 	public long getSleepTime() {

@@ -42,14 +42,14 @@ public class EmagentPanel extends JPanel implements TickListener{
 	private static final String TICK = "Tick: ";
 	private static final String TOTAL_MONETARY_STRING = "Total Money: ";
 	private static final String TOTAL_IMBALANCE_STRING = "Total Imbalance: ";
-	private static final String NORMALIZED_TOTAL_IMBALANCE_STRING = "Total Imbalance: ";
+	private static final String NORMALIZED_TOTAL_IMBALANCE_STRING = "Total Imbalance Norm.: ";
 	private static final String TOTAL_CONSUMATION_STRING = "Total Cons.: ";
 	private static final String AVERAGE_ENERGY_PRICE_STRING = "Average Energy Price: ";
 	private static final String CSV_HEADER = 	TICK + "," +
 												TOTAL_MONETARY_STRING + "," +
+												TOTAL_CONSUMATION_STRING + "," +
 												TOTAL_IMBALANCE_STRING + "," +
 												NORMALIZED_TOTAL_IMBALANCE_STRING + "," +
-												TOTAL_CONSUMATION_STRING + "," +
 												AVERAGE_ENERGY_PRICE_STRING;
 	private static final String CSV_FILE_NAME = "data.csv";
 	
