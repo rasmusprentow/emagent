@@ -12,10 +12,10 @@ import emagent.ui.TickListener;
 public class Environment implements IEnvironment {
 
 	static private IEnvironment instance = null;
-	protected int time;
+	protected long time;
 	private ITestSet testSet;
 	protected ArrayList<TickListener> tickNotifiers;
-	private int standardElectricityPrice = 1000;
+	private long standardElectricityPrice = 1000;
 	private long sleepTime = 512;
 
 	@Override
@@ -44,7 +44,7 @@ public class Environment implements IEnvironment {
 	}
 	
 	
-	private int getStandardElectricityPrice()
+	private long getStandardElectricityPrice()
 	{
 		return standardElectricityPrice;
 	}
@@ -120,7 +120,7 @@ public class Environment implements IEnvironment {
 
 	@Override
 	public long getStandardProductionElectricityPrice() {
-		return (int) (getStandardElectricityPrice() * 0.90);
+		return (long) (getStandardElectricityPrice() * 0.90);
 	}
 
 	@Override
