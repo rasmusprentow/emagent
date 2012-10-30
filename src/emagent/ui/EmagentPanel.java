@@ -255,7 +255,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 	
 	public void updateTotalMoney()
 	{
-		int total = 0;
+		long total = 0;
 		for(IBrp brp : Environment.getEnvironment().getBrps())
 		{
 			total += (brp.getCurrentMonetaryBalance());
