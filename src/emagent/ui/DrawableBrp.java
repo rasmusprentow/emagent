@@ -54,13 +54,14 @@ public class DrawableBrp extends DrawableAgent {
 	
 	private String formatTotalConsumption()
 	{
-		if(brp.getTotalConsumption() < 0)
+		int cons = brp.getTotalConsumption();
+		if(cons < 0)
 		{
-			return "Prod: " + Math.abs(brp.getTotalConsumption());
+			return "Prod: " + Math.abs(cons);
 		}
 		else
 		{
-			return "Cons: " + brp.getTotalConsumption();
+			return "Cons: " + cons;
 		}
 		
 		
