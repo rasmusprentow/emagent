@@ -7,12 +7,12 @@ public class FirstPriceSealedBidOneShotSellingStrategy implements
 		IBrpSellingStrategy {
 
 	@Override
-	public AuctionList postAuctions(int energyBalance, AuctionType auctionType, IBrp seller) {
+	public AuctionList postAuctions(long energyBalance, AuctionType auctionType, IBrp seller) {
 		AuctionList res = new AuctionList();
 		
 		while(energyBalance > 0)
 		{
-			int curBid = Math.min(energyBalance/3+1,energyBalance);
+			long curBid = Math.min(energyBalance/3+1,energyBalance);
 			res.add(AuctionFactory.getFactory().create(
 					auctionType, 
 					curBid, 

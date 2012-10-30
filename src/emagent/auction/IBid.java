@@ -4,6 +4,6 @@ package emagent.auction;
 import emagent.agent.brp.*;
 public interface IBid {
 
-	public int getPrice();
+	public long getPrice();
 	public IBrp getBuyer(); 
 }

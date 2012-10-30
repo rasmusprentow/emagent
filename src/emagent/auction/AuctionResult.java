@@ -6,20 +6,20 @@ import emagent.agent.brp.*;
 public class AuctionResult implements IAuctionResult {
 	protected IAuction auction;
 	
-	protected int price;
+	protected long price;
 	protected IBrp buyer;
 	
-	public AuctionResult(IAuction auction, int price, IBrp buyer)
+	public AuctionResult(IAuction auction, long l, IBrp buyer)
 	{
 		this.auction = auction;
-		this.price = price;
+		this.price = l;
 		this.buyer = buyer;
 	}
 	
 	public IAuction getAuction() {
 		return auction;
 	}
-	public int getPrice() {
+	public long getPrice() {
 		return price;
 	}
 	public IBrp getBuyer() {
@@ -30,11 +30,11 @@ public class AuctionResult implements IAuctionResult {
 		return auction.getStatus();
 	}
 
-	public int getQuantity() {
+	public long getQuantity() {
 		return auction.getQuantity();
 	}
 
-	public int getStartingPrice() {
+	public long getStartingPrice() {
 		return auction.getStartingPrice();
 	}
 

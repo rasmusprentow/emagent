@@ -17,11 +17,12 @@ public class DrawableBrp extends DrawableAgent {
 	private Label money;
 	private Label consumation;
 	private Label electricity;
+	private Label fines;
 	public DrawableBrp(IBrp brp) {
 		
 		this.brp = brp;
 		setPreferredSize(new Dimension(99,99));
-		setLayout(new GridLayout(4,1));
+		setLayout(new GridLayout(5,1));
 		setVisible(true);
 		setBackground(Color.GREEN);
 		this.add(new Label(this.toString()));
@@ -30,9 +31,11 @@ public class DrawableBrp extends DrawableAgent {
 		money = new Label("Money           ");
 		electricity = new Label("electricity              ");
 		consumation = new Label("consumation              ");
+		fines = new Label("fines              ");
 		this.add(money);
 		this.add(electricity);
 		this.add(consumation);
+		this.add(fines);
 	}
 
 	@Override
@@ -45,6 +48,7 @@ public class DrawableBrp extends DrawableAgent {
 		money.setText("Cash: " + brp.getCurrentMonetaryBalance()/1000 + "k");
 		electricity.setText("Electricity: " +brp.getCurrentElectricalBalance());
 		consumation.setText(formatTotalConsumption());
+		fines.setText("Fined: " + brp.getFineAmountThisRound() / 1000 + "k");
 	}
 	
 	
@@ -55,7 +59,7 @@ public class DrawableBrp extends DrawableAgent {
 	
 	private String formatTotalConsumption()
 	{
-		int cons = brp.getTotalConsumption();
+		long cons = brp.getTotalConsumption();
 		if(cons < 0)
 		{
 			return "Prod: " + Math.abs(cons);

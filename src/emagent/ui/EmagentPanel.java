@@ -286,7 +286,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 	
 	
 	@Override
-	public void notifyTick(int time) throws Exception {
+	public void notifyTick(long time) throws Exception {
 		if(drawableAgents == null)
 		{
 			

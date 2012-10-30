@@ -4,6 +4,6 @@ import emagent.auction.AuctionList;
 
 public interface IBrpBiddingStrategy {
 	
-	public void bidOnAuctions(AuctionList auctions, int monetaryBalance,
-			int electricalBalance, IBrp bidder) throws Exception;
+	public void bidOnAuctions(AuctionList auctions, long monetaryBalance,
+			long l, IBrp bidder) throws Exception;
 }

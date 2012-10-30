@@ -1,18 +1,18 @@
 package emagent.environment;
 
 public class PowerFine implements IFine {
-	protected int pricePerImbalance;
-	protected int imbalance;
+	protected long pricePerImbalance;
+	protected long imbalance;
 	
-	public PowerFine(int amountPerImbalance, int imbalance)
+	public PowerFine(long l, long imbalance2)
 	{
-		this.pricePerImbalance = amountPerImbalance;
-		this.imbalance = imbalance;
+		this.pricePerImbalance = l;
+		this.imbalance = imbalance2;
 	}
 	
-	public int amount()
+	public long amount()
 	{
-		return (int) (pricePerImbalance*Math.pow(imbalance, 1.1));
+		return (long) (pricePerImbalance*Math.pow(imbalance, 1.1));
 	}
 
 }

@@ -10,7 +10,7 @@ public class ExponentialFine implements IFine {
 		this.imbalance = imbalance;
 	}
 	
-	public int amount()
+	public long amount()
 	{
 		return pricePerImbalance^imbalance;
 	}

@@ -25,19 +25,19 @@ public class NewRoundAuction implements IAuction {
 	}
 
 	@Override
-	public int getQuantity() {
+	public long getQuantity() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int getStartingPrice() {
+	public long getStartingPrice() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int getMinimumBidPrice() {
+	public long getMinimumBidPrice() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

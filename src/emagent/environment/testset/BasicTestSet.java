@@ -30,8 +30,8 @@ public class BasicTestSet extends AbstractTestSet
 		I2IFunction func1 = new I2IFunction()
 		{
 			@Override
-			public int map(int arg) {
-				return (int) (0.01 * arg);
+			public long map(long arg) {
+				return (long) (0.01 * arg);
 				
 			}
 		};
@@ -39,8 +39,8 @@ public class BasicTestSet extends AbstractTestSet
 		I2IFunction func2 = new I2IFunction()
 		{
 			@Override
-			public int map(int arg) {
-				return (int) (-0.01 * arg);
+			public long map(long arg) {
+				return (long) (-0.01 * arg);
 				
 			}
 		};

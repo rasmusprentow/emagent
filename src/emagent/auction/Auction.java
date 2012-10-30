@@ -5,18 +5,18 @@ import emagent.agent.brp.*;
 
 
 public abstract class Auction implements IAuction{
-	protected int quantity;
-	protected int startingPrice;
+	protected long quantity;
+	protected long startingPrice;
 	protected AuctionStatus status;
 	protected IBrp seller;
 	protected Stack<IBid> bids;
 	protected IAuctionResult result;
 	private boolean bidAdded = false;
 	
-	public Auction(int quantity, int startingPrice, IBrp seller)
+	public Auction(long electricalAmount, long startingPrice2, IBrp seller)
 	{
-		this.quantity = quantity;
-		this.startingPrice = startingPrice;
+		this.quantity = electricalAmount;
+		this.startingPrice = startingPrice2;
 		this.seller = seller;
 		status = AuctionStatus.CREATED;
 		bids = new Stack<IBid>();
@@ -45,11 +45,11 @@ public abstract class Auction implements IAuction{
 		this.status = status;
 	}
 
-	public int getQuantity() {
+	public long getQuantity() {
 		return quantity;
 	}
 
-	public int getStartingPrice() {
+	public long getStartingPrice() {
 		return startingPrice;
 	}
 

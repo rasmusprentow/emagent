@@ -13,7 +13,7 @@ public interface IMarket extends IAgent {
 	public  void unsubscribeToAuctions(IBrp l);
 
 
-	public void notifyTick(int newTick) throws Exception;
+	public void notifyTick(long newTick) throws Exception;
 
 	public abstract void startRound() throws Exception;
 

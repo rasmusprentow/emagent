@@ -44,9 +44,9 @@ public abstract class AbstractTestSet implements ITestSet {
 	}
 
 	
-	protected IBrp createBrp(String name, int cash)
+	protected IBrp createBrp(String name, long l)
 	{
-		IBrp brp1 = new Brp(name, cash);
+		IBrp brp1 = new Brp(name, l);
 	
 		market.subscribeToAuctions(brp1);
 	

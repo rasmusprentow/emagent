@@ -1,22 +1,23 @@
 package emagent.agent.prosumer;
 
+
 public class ConstantProsumer extends AbstractProsumer implements IProsumer {
 
-	protected int consumation;
+	protected long consumation;
 
-	public ConstantProsumer(int consumation) {
+	public ConstantProsumer(long consumation) {
 		super();
 		this.consumation = consumation;
 	}
 	
 	@Override
-	public int getTotalConsumption() {
+	public long getTotalConsumption() {
 		
 		return consumation;
 	}
 
 	@Override
-	public void notifyTick(int time) throws Exception {
+	public void notifyTick(long time) throws Exception {
 		// TODO Auto-generated method stub
 		update();
 	}

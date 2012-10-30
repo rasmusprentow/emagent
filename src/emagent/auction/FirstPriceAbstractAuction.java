@@ -7,9 +7,9 @@ import emagent.agent.brp.IBrp;
 
 public abstract class FirstPriceAbstractAuction extends Auction {
 
-	public FirstPriceAbstractAuction(int quantity, int startingPrice,
+	public FirstPriceAbstractAuction(long electricalAmount, long startingPrice,
 			IBrp seller) {
-		super(quantity, startingPrice, seller);
+		super(electricalAmount, startingPrice, seller);
 		// TODO Auto-generated constructor stub
 	}
 

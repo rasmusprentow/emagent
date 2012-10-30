@@ -39,7 +39,7 @@ public class Environment implements IEnvironment {
 	
 	private Environment()
 	{
-		testSet = new MoreDynamicTestSet();
+		testSet = new LessDynamicTestSet();
 		tickNotifiers = new ArrayList<TickListener>();
 	}
 	
@@ -103,7 +103,7 @@ public class Environment implements IEnvironment {
 	}
 
 	@Override
-	public int getTime() {
+	public long getTime() {
 		return time;
 	}
 
@@ -114,22 +114,22 @@ public class Environment implements IEnvironment {
 	}
 
 	@Override
-	public int getStandardConsumationElectricityPrice() {
-		return (int) (getStandardElectricityPrice() * 1.10);
+	public long getStandardConsumationElectricityPrice() {
+		return (long) (getStandardElectricityPrice() * 1.10);
 	}
 
 	@Override
-	public int getStandardProductionElectricityPrice() {
+	public long getStandardProductionElectricityPrice() {
 		return (int) (getStandardElectricityPrice() * 0.90);
 	}
 
 	@Override
-	public int getStandardFineElectricityPrice() {
-		return (int) (getStandardElectricityPrice() * 1.5);
+	public long getStandardFineElectricityPrice() {
+		return (long) (getStandardElectricityPrice() * 1.5);
 	}
 
 	@Override
-	public int getPriceDifference() {
+	public long getPriceDifference() {
 		return getStandardConsumationElectricityPrice()-getStandardProductionElectricityPrice();
 	}
 

@@ -11,7 +11,7 @@ import emagent.ui.TickListener;
 
 public interface IEnvironment {
 	
-	public int getTime();
+	public long getTime();
 	public void turnOver() throws Exception;
 	void start(TickListener tickListener) throws Exception;
 	public abstract IMarket getMarket();
@@ -19,10 +19,10 @@ public interface IEnvironment {
 	public abstract ArrayList<IBrp> getBrps();
 	public abstract Collection<TickListener> getTickNotifiers();
 
-	public int getStandardConsumationElectricityPrice();
-	int getStandardProductionElectricityPrice();
-	public int getStandardFineElectricityPrice();
-	public int getPriceDifference();
+	public long getStandardConsumationElectricityPrice();
+	long getStandardProductionElectricityPrice();
+	public long getStandardFineElectricityPrice();
+	public long getPriceDifference();
 	public ITso getTso();
 	public abstract void setSleepTime(long sleepTime);
 	public abstract long getSleepTime();
