@@ -43,23 +43,23 @@ public class LessDynamicTestSet extends AbstractTestSet {
 		});
 	
 		createProsumer("powerplant 100", new ConstantProsumer(-100), brpa);
-		createProsumer("house", new SinusProsumer(10, 0, 5), brpa);
+		createProsumer("Kronborg", new SinusProsumer(10, 0, 5), brpa);
 		createProsumer("solarCell", new SinusProsumer(-20, 0, 0), brpb);
-		createProsumer("farm", new SinusProsumer(20, 0, 5), brpb);
-		createProsumer("powerplant50", new ConstantProsumer(-50), brpc);
+		createProsumer("Højbjerghuse", new SinusProsumer(20, 0, 5), brpb);
+		createProsumer("powerplant 50", new ConstantProsumer(-50), brpc);
 		createProsumer("solarCell2", new SinusProsumer(-20, 0, 0), brpc);
-		createProsumer("city", new ConstantProsumer(200), brpc);
-		createProsumer("town", new SinusProsumer(70, 0, 60), brpd);
-		createProsumer("village", new SinusProsumer(40, 0, 20), brpe);
+		createProsumer("Skanderborg", new ConstantProsumer(200), brpc);
+		createProsumer("Hjoering", new SinusProsumer(70, 0, 60), brpd);
+		createProsumer("Randers", new SinusProsumer(40, 0, 20), brpe);
 		createProsumer("powerplant150", new ConstantProsumer(-150), brpf);
-		createProsumer("village2", new SinusProsumer(50, 0, 25), brpg);
+		createProsumer("Viborg", new SinusProsumer(50, 0, 25), brpg);
 		createProsumer("windmill", windmill, brpg);
 		createProsumer("nuclear",  new NuclearProsumer(300,24*30,4), brph);
-		createProsumer("city2", new ConstantProsumer(200), brph);
+		createProsumer("Aarhus", new ConstantProsumer(200), brph);
 		createProsumer("village3", new ConstantProsumer(100), brpi);
 		createProsumer("windmill2", windmill2, brpj);
 		createProsumer("nuclear2", new NuclearProsumer(300,24*30*12,24*2), brpj);
-		createProsumer("city3", new ConstantProsumer(200), brpj);
-		createProsumer("village4", new ConstantProsumer(100), brpj);
+		createProsumer("Aalborg", new ConstantProsumer(200), brpj);
+		createProsumer("Nørresundby", new ConstantProsumer(100), brpj);
 	}
 }
