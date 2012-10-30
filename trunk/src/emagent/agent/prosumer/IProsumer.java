@@ -12,7 +12,13 @@ public interface IProsumer extends IAgent{
 	
 	long payElectricalBill();
 
+	String getBrpName();
+
+	void setBrpName(String brpName);
+
+	String getName();
+
 	void setName(String name);
 
-	public String getName();
+	
 }

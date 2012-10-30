@@ -45,7 +45,7 @@ public abstract class AbstractTestSet implements ITestSet {
 
 	protected IProsumer createProsumer(String name, IProsumer prosumer, IBrp brp)
 	{
-		
+		prosumer.setBrpName(brp.toString());
 		brp.addProsumer(prosumer);
 		prosumers.add(prosumer);
 		prosumer.setName(name);
