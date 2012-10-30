@@ -22,8 +22,6 @@ public class ConstantProsumer extends AbstractProsumer implements IProsumer {
 		update();
 	}
 
-	public String getName() {
-		return null;
-	}
+	
 
 }

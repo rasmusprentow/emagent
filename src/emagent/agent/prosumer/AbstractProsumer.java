@@ -7,6 +7,7 @@ abstract public class AbstractProsumer extends AbstractAgent implements IProsume
 	
 
 	private String name; 
+	private String brpName;
 	
 	@Override
 	public String getName() {
@@ -16,7 +17,7 @@ abstract public class AbstractProsumer extends AbstractAgent implements IProsume
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public long payElectricalBill()
 	{
 		if(this.getTotalConsumption() >= 0){
@@ -26,6 +27,16 @@ abstract public class AbstractProsumer extends AbstractAgent implements IProsume
 			return Environment.getEnvironment().getStandardProductionElectricityPrice() * this.getTotalConsumption();
 		}
 		
+	}
+
+	@Override
+	public String getBrpName() {
+		return brpName;
+	}
+
+	@Override
+	public void setBrpName(String brpName) {
+		this.brpName = brpName;
 	}
 
 }
