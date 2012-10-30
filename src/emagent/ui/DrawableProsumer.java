@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
 
-import emagent.agent.IProsumer;
+import emagent.agent.prosumer.IProsumer;
 import emagent.ui.listeners.GuiDisListener;
 
 public class DrawableProsumer extends DrawableAgent {

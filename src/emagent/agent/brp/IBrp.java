@@ -3,6 +3,7 @@ package emagent.agent.brp;
 import java.util.Collection;
 import java.util.EventListener;
 import emagent.agent.*;
+import emagent.agent.prosumer.IProsumer;
 import emagent.auction.*;
 import emagent.environment.IFine;
 

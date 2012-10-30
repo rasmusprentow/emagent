@@ -3,10 +3,10 @@ package emagent.environment.testset;
 import java.util.ArrayList;
 
 import emagent.agent.IMarket;
-import emagent.agent.IProsumer;
 import emagent.agent.ITso;
 import emagent.agent.brp.Brp;
 import emagent.agent.brp.IBrp;
+import emagent.agent.prosumer.IProsumer;
 
 public abstract class AbstractTestSet implements ITestSet {
 

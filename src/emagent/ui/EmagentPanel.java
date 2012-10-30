@@ -16,7 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import emagent.agent.brp.*;
-import emagent.agent.IProsumer;
+import emagent.agent.prosumer.IProsumer;
 import emagent.auction.IAuction;
 import emagent.auction.NewRoundAuction;
 import emagent.auction.NotSoldResult;

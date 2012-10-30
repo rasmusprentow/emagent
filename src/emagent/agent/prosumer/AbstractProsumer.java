@@ -1,5 +1,6 @@
-package emagent.agent;
+package emagent.agent.prosumer;
 
+import emagent.agent.AbstractAgent;
 import emagent.environment.Environment;
 
 abstract public class AbstractProsumer extends AbstractAgent implements IProsumer {

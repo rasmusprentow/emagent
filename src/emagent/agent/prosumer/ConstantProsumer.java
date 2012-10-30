@@ -1,4 +1,4 @@
-package emagent.agent;
+package emagent.agent.prosumer;
 
 public class ConstantProsumer extends AbstractProsumer implements IProsumer {
 

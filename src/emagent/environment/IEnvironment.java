@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import emagent.agent.brp.*;
+import emagent.agent.prosumer.IProsumer;
 import emagent.agent.IMarket;
-import emagent.agent.IProsumer;
 import emagent.agent.ITso;
 import emagent.ui.TickListener;
 

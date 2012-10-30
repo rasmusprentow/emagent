@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import emagent.agent.*;
 import emagent.agent.brp.IBrp;
+import emagent.agent.prosumer.IProsumer;
 import emagent.environment.IEnvironment;
 
 public interface ITestSet {
