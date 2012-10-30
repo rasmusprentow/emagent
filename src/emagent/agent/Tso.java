@@ -24,9 +24,9 @@ public class Tso extends AbstractAgent implements ITso {
 		for(IBrp brp : market.getAuctionListeners())
 		{
 			int imbalance = brp.getCurrentElectricalBalance();
-			if(imbalance > 0)
+			if(imbalance < 0)
 			{
-				brp.notifyFine(new PowerFine(Environment.getEnvironment().getStandardFineElectricityPrice(),imbalance));
+				brp.notifyFine(new PowerFine(Environment.getEnvironment().getStandardFineElectricityPrice(), - imbalance));
 			}
 			if(imbalance > -5 && imbalance <= 0)
 			{
