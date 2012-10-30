@@ -42,11 +42,13 @@ public class EmagentPanel extends JPanel implements TickListener{
 	private static final String TICK = "Tick: ";
 	private static final String TOTAL_MONETARY_STRING = "Total Money: ";
 	private static final String TOTAL_IMBALANCE_STRING = "Total Imbalance: ";
+	private static final String NORMALIZED_TOTAL_IMBALANCE_STRING = "Total Imbalance: ";
 	private static final String TOTAL_CONSUMATION_STRING = "Total Cons.: ";
 	private static final String AVERAGE_ENERGY_PRICE_STRING = "Average Energy Price: ";
 	private static final String CSV_HEADER = 	TICK + "," +
 												TOTAL_MONETARY_STRING + "," +
 												TOTAL_IMBALANCE_STRING + "," +
+												NORMALIZED_TOTAL_IMBALANCE_STRING + "," +
 												TOTAL_CONSUMATION_STRING + "," +
 												AVERAGE_ENERGY_PRICE_STRING;
 	private static final String CSV_FILE_NAME = "data.csv";
@@ -171,9 +173,9 @@ public class EmagentPanel extends JPanel implements TickListener{
 
 	}
 	
-	public void updateTotalEnergyConsumation()
+	public long updateTotalEnergyConsumation()
 	{
-		int total = 0;
+		long total = 0;
 		for(IProsumer pro : Environment.getEnvironment().getProsumers())
 		{
 			total += pro.getTotalConsumption();
@@ -186,28 +188,31 @@ public class EmagentPanel extends JPanel implements TickListener{
 			e.printStackTrace();
 		}
 		if(GuiDisListener.isDisabled())
-		{ return; }
+		{ return total; }
 		totalConsumptionLabel.setText(TOTAL_CONSUMATION_STRING + total + " MW (" + grandTotalConsumption + ")" );
-	
-			
+		
+		return total;	
 		
 	}
 	
-	public void updateTotalEnergyImbalance()
+	public void updateTotalEnergyImbalance(long totalConsumption)
 	{
-		int total = 0;
+		long total = 0;
 		for(IBrp brp : Environment.getEnvironment().getBrps())
 		{
 			total += Math.abs(brp.getCurrentElectricalBalance());
 		}
+		
 		try {
-			out.write("," + total);
+			out.write("," + total + "," + (total - Math.abs(totalConsumption)));
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		if(GuiDisListener.isDisabled())
 		{ return; }
-		totalImbalanceLabel.setText(TOTAL_IMBALANCE_STRING + total + " MW");
+		totalImbalanceLabel.setText(TOTAL_IMBALANCE_STRING + total + " MW (" + (total - Math.abs(totalConsumption) )+ ")");
 		
 		
 	}
@@ -313,8 +318,9 @@ public class EmagentPanel extends JPanel implements TickListener{
 		}
 
 		updateTotalMoney();
-		updateTotalEnergyImbalance();
-		updateTotalEnergyConsumation();
+		long cons = updateTotalEnergyConsumation();
+		updateTotalEnergyImbalance(cons);
+		
 		updateAverageEnergyPrice();
 		if(GuiDisListener.isDisabled())
 		{

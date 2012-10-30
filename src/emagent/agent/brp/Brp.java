@@ -65,7 +65,7 @@ public class Brp extends AbstractAgent implements IBrp{
 		{
 			throw new Error();
 		}
-		return sellingStrategy.postAuctions(-getTotalConsumption(),auctionType,this);
+		return sellingStrategy.postAuctions( - getTotalConsumption(),auctionType,this);
 	}
 
 	@Override
