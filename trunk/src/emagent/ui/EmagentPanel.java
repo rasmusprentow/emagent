@@ -100,7 +100,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 		this.add(rightSide);
 		
 		topPanel = new JPanel();
-		topPanel.setLayout(new GridLayout(4,1));
+		topPanel.setLayout(new GridLayout(3,2));
 		topPanel.add(totalConsumptionLabel);
 		topPanel.add(totalImbalanceLabel);
 		topPanel.add(averageEnergyPricelabel);

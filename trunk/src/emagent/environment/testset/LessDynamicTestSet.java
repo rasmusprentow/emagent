@@ -16,7 +16,7 @@ public class LessDynamicTestSet extends AbstractTestSet {
 	{
 		market = new FirstPriceOpenCryAscendingMarket();
 		tso = new Tso(market);
-		env.setSleepTime(500);
+		env.setSleepTime(512);
 		IBrp brpa = createBrp("Anne",env.getStandardConsumationElectricityPrice()*15000);
 		IBrp brpb = createBrp("Bente",env.getStandardConsumationElectricityPrice()*15000);
 		IBrp brpc = createBrp("Christinna",env.getStandardConsumationElectricityPrice()*15000);
@@ -50,7 +50,8 @@ public class LessDynamicTestSet extends AbstractTestSet {
 		createProsumer("Alex Solar Center", new SinusProsumer(-20, 0, 0), brpc);
 		createProsumer("Skanderborg", new ConstantProsumer(200), brpc);
 		createProsumer("Hjoering", new SinusProsumer(70, 0, 60), brpd);
-		createProsumer("Randers", new SinusProsumer(40, 0, 20), brpe);
+		createProsumer("Randers", new SinusProsumer(60, 0, 20), brpe);
+		createProsumer("Lunar Plant Randers", new SinusProsumer(-20, 0, 0,24*29), brpe);
 		createProsumer("Powerplant 150", new ConstantProsumer(-150), brpf);
 		createProsumer("Viborg", new SinusProsumer(50, 0, 25), brpg);
 		createProsumer("Windmill", windmill, brpg);
