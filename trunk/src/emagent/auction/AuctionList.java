@@ -20,7 +20,7 @@ public class AuctionList extends ArrayList<IAuction> {
 		Collections.sort(this, new Comparator<IAuction>() {
 			@Override
 			public int compare(IAuction o1, IAuction o2) {
-				return (o1.getStartingPrice() - o2.getStartingPrice()) * multiplyer;
+				return (int) ((o1.getStartingPrice() - o2.getStartingPrice()) * multiplyer);
 			}
 		});
 		
@@ -38,7 +38,7 @@ public class AuctionList extends ArrayList<IAuction> {
 		Collections.sort(this, new Comparator<IAuction>() {
 			@Override
 			public int compare(IAuction o1, IAuction o2) {
-				return (o1.getQuantity() - o2.getQuantity()) * multiplyer;
+				return (int) ((o1.getQuantity() - o2.getQuantity()) * multiplyer);
 			}
 		});
 		return this;
@@ -55,7 +55,7 @@ public class AuctionList extends ArrayList<IAuction> {
 		Collections.sort(this, new Comparator<IAuction>() {
 			@Override
 			public int compare(IAuction o1, IAuction o2) {
-				return (o1.getMinimumBidPrice()/o1.getQuantity() - o2.getMinimumBidPrice()/o2.getQuantity()) * multiplyer;
+				return (int) ((o1.getMinimumBidPrice()/o1.getQuantity() - o2.getMinimumBidPrice()/o2.getQuantity()) * multiplyer);
 			}
 		});
 		return this;

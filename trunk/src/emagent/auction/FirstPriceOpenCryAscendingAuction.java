@@ -6,15 +6,15 @@ public class FirstPriceOpenCryAscendingAuction extends FirstPriceAbstractAuction
 
 	private AuctionType auctionType;
 
-	public FirstPriceOpenCryAscendingAuction(int quantity, int startingPrice,
+	public FirstPriceOpenCryAscendingAuction(long electricalAmount, long startingPrice,
 			IBrp seller) {
-		super(quantity, startingPrice, seller);
+		super(electricalAmount, startingPrice, seller);
 		
 	}
 
 	@Override
-	public int getMinimumBidPrice() {
-		int min = getStartingPrice();
+	public long getMinimumBidPrice() {
+		long min = getStartingPrice();
 		for(IBid bid : bids)
 		{
 			if(bid.getPrice() > min)

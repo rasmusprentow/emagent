@@ -7,7 +7,7 @@ abstract public class AbstractProsumer extends AbstractAgent implements IProsume
 	
 
 
-	public int payElectricalBill()
+	public long payElectricalBill()
 	{
 		if(this.getTotalConsumption() >= 0){
 			return Environment.getEnvironment().getStandardConsumationElectricityPrice() * this.getTotalConsumption();

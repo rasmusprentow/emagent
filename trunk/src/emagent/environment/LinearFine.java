@@ -10,7 +10,7 @@ public class LinearFine implements IFine {
 		this.imbalance = imbalance;
 	}
 	
-	public int amount()
+	public long amount()
 	{
 		return imbalance*pricePerImbalance;
 	}

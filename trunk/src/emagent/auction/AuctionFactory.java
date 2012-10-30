@@ -6,8 +6,8 @@ public class AuctionFactory implements IAuctionFactory {
 
 	private static AuctionFactory instance = null;
 	@Override
-	public IAuction create(AuctionType auctionType, int electricalAmount,
-			int startingPrice, IBrp seller) {
+	public IAuction create(AuctionType auctionType, long electricalAmount,
+			long startingPrice, IBrp seller) {
 		if(auctionType.getBidType() == BidType.OPEN_CRY){
 			return new FirstPriceOpenCryAscendingAuction(electricalAmount, startingPrice, seller);
 		} else {

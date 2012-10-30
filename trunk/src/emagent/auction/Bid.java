@@ -4,15 +4,15 @@ package emagent.auction;
 import emagent.agent.brp.*;
 
 public class Bid implements IBid {
-	protected int price;
+	protected long price;
 	protected IBrp buyer;
-	public Bid(int price, IBrp buyer)
+	public Bid(long finalBidPrice, IBrp buyer)
 	{
-		this.price = price;
+		this.price = finalBidPrice;
 		this.buyer = buyer;
 	}
 	
-	public int getPrice() {
+	public long getPrice() {
 		return price;
 	}
 	

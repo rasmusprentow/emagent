@@ -8,9 +8,9 @@ public interface IAuction {
 	public boolean addBid(IBid e) throws Exception;
 	public AuctionStatus getStatus();
 	public void setStatus(AuctionStatus status);
-	public int getQuantity();
-	public int getStartingPrice();
-	public int getMinimumBidPrice();
+	public long getQuantity();
+	public long getStartingPrice();
+	public long getMinimumBidPrice();
 	public IBrp getSeller();
 	public Stack<IBid> getBids();
 	public void close();

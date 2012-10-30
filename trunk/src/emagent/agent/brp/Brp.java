@@ -12,18 +12,19 @@ import emagent.environment.IFine;
 
 public class Brp extends AbstractAgent implements IBrp{
 	
-	protected int electricalBalance = 0;
-	protected int monetaryBalance;
+	protected long electricalBalance = 0;
+	protected long monetaryBalance;
 	protected Collection<IProsumer> prosumers;
 	protected IAuctionFactory auctionFactory;
 	protected HashMap<AuctionType,IBrpSellingStrategy> sellingStrategies;
 	protected HashMap<AuctionType,IBrpBiddingStrategy> biddingStrategies;
 	private String name;
+	private long fineAmountThisRound;
 	
-	public Brp(String name, int monetaryBalance)
+	public Brp(String name, long l)
 	{
 		this.name = name;
-		this.monetaryBalance = monetaryBalance;
+		this.monetaryBalance = l;
 		prosumers = new ArrayList<IProsumer>();
 		sellingStrategies = new HashMap<AuctionType, IBrpSellingStrategy>();
 		sellingStrategies.put(
@@ -50,8 +51,9 @@ public class Brp extends AbstractAgent implements IBrp{
 	}
 
 	@Override
-	public void notifyTick(int newTick) {
+	public void notifyTick(long newTick) {
 		this.electricalBalance = 0;
+		this.fineAmountThisRound = 0;
 		for(IProsumer prosumer : this.prosumers){
 			this.monetaryBalance += prosumer.payElectricalBill();
 		}
@@ -105,20 +107,21 @@ public class Brp extends AbstractAgent implements IBrp{
 	@Override
 	public void notifyFine(IFine fine) {
 		this.monetaryBalance -= fine.amount();
-		
+		fineAmountThisRound += fine.amount();
+		update();
 	}
 
 	@Override
-	public int getCurrentMonetaryBalance() {
+	public long getCurrentMonetaryBalance() {
 		return monetaryBalance;
 	}
 
 	@Override
-	public int getCurrentElectricalBalance() {
+	public long getCurrentElectricalBalance() {
 		return electricalBalance - getTotalConsumption();
 	}
 	
-	public int getTotalConsumption(){
+	public long getTotalConsumption(){
 		int total = 0;
 		for (IProsumer p : prosumers)
 		{
@@ -131,6 +134,11 @@ public class Brp extends AbstractAgent implements IBrp{
 	public String toString()
 	{
 		return name;
+	}
+
+	@Override
+	public long getFineAmountThisRound() {
+		return this.fineAmountThisRound;
 	}
 	
 	

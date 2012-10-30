@@ -5,13 +5,13 @@ import emagent.agent.brp.*;
 
 public interface IAuctionResult {
 	public IAuction getAuction();
-	public int getPrice();
+	public long getPrice();
 	public IBrp getBuyer();
 	public AuctionStatus getStatus();
 
-	public int getQuantity();
+	public long getQuantity();
 
-	public int getStartingPrice();
+	public long getStartingPrice();
 
 	public IBrp getSeller();
 }

@@ -4,22 +4,22 @@ import emagent.agent.I2IFunction;
 
 public class VariableProsumer extends AbstractProsumer implements IProsumer {
 	
-	private int time;
+	private long time;
 	private I2IFunction function;
-	private int totalConsumption = 0;
+	private long totalConsumption = 0;
 	public VariableProsumer(I2IFunction func) {
 		function = func;
 	}
 
 	@Override
-	public void notifyTick(int time) throws Exception {
+	public void notifyTick(long time) throws Exception {
 		this.time = time;
 		totalConsumption = function.map(time);
 		update();
 	}
 
 	@Override
-	public int getTotalConsumption() {
+	public long getTotalConsumption() {
 		return totalConsumption;
 	}
 

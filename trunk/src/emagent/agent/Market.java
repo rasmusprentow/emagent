@@ -55,7 +55,7 @@ public abstract class Market extends AbstractAgent implements IMarket {
 	}
 
 	@Override
-	public void notifyTick(int newTick) throws Exception {
+	public void notifyTick(long newTick) throws Exception {
 		update();
 	
 	}

@@ -8,14 +8,14 @@ public class FirstPriceSealedBidOneShotAuction extends FirstPriceAbstractAuction
 
 	private AuctionType auctionType;
 
-	public FirstPriceSealedBidOneShotAuction(int quantity, int startingPrice,
+	public FirstPriceSealedBidOneShotAuction(long electricalAmount, long startingPrice,
 			IBrp seller) {
-		super(quantity, startingPrice, seller);
+		super(electricalAmount, startingPrice, seller);
 
 	}
 
 	@Override
-	public int getMinimumBidPrice() {
+	public long getMinimumBidPrice() {
 	
 		return  getStartingPrice();
 	}

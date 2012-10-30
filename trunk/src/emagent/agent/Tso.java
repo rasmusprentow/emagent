@@ -15,7 +15,7 @@ public class Tso extends AbstractAgent implements ITso {
 	}
 	
 	@Override
-	public void notifyTick(int time) throws Exception {
+	public void notifyTick(long time) throws Exception {
 		
 	}
 
@@ -23,7 +23,7 @@ public class Tso extends AbstractAgent implements ITso {
 	public void checkBrps() {
 		for(IBrp brp : market.getAuctionListeners())
 		{
-			int imbalance = brp.getCurrentElectricalBalance();
+			long imbalance = brp.getCurrentElectricalBalance();
 			if(imbalance < 0)
 			{
 				brp.notifyFine(new PowerFine(Environment.getEnvironment().getStandardFineElectricityPrice(), - imbalance));
@@ -36,7 +36,7 @@ public class Tso extends AbstractAgent implements ITso {
 	}
 
 	@Override
-	public int getFineSize(int imbalance) {
+	public long getFineSize(long imbalance) {
 		return new PowerFine(Environment.getEnvironment().getStandardFineElectricityPrice(), imbalance).amount();
 	}
 	

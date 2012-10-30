@@ -8,7 +8,7 @@ import emagent.agent.prosumer.VariableProsumer;
 
 import emagent.environment.IEnvironment;
 
-public class MoreDynamicTestSet extends AbstractTestSet {
+public class LessDynamicTestSet extends AbstractTestSet {
 
 	@Override
 	public void setup(IEnvironment env) 
@@ -23,6 +23,7 @@ public class MoreDynamicTestSet extends AbstractTestSet {
 		IBrp brpe = createBrp("E",env.getStandardConsumationElectricityPrice()*15000);
 		IBrp brpf = createBrp("F",env.getStandardConsumationElectricityPrice()*15000);
 		IBrp brpg = createBrp("G",env.getStandardConsumationElectricityPrice()*15000);
+		IBrp brph = createBrp("H",env.getStandardConsumationElectricityPrice()*15000);
 		
 		
 		IProsumer powerplant100 = new ConstantProsumer(-100);
@@ -45,6 +46,22 @@ public class MoreDynamicTestSet extends AbstractTestSet {
 			
 			
 		});
+		
+		IProsumer nuclear = new VariableProsumer(new I2IFunction(){
+
+			@Override
+			public long map(long arg) {
+				if(arg < 5)
+				{
+					return 10000;
+				} else 
+				{
+					return -300;
+				}
+			}
+			
+			
+		});
 	/*	IProsumer village3 = new SinusProsumer(40, 0, 20);
 		IProsumer nuclear = new VariableProsumer(100);
 		*/
@@ -60,6 +77,7 @@ public class MoreDynamicTestSet extends AbstractTestSet {
 		prosumers.add(powerplant150);
 		prosumers.add(village2);
 		prosumers.add(windmill);
+		prosumers.add(nuclear);
 		
 		brpa.addProsumer(powerplant100);
 		brpa.addProsumer(house);
@@ -77,6 +95,9 @@ public class MoreDynamicTestSet extends AbstractTestSet {
 		
 		brpg.addProsumer(village2);
 		brpg.addProsumer(windmill);
+		
+		brph.addProsumer(nuclear);
+		
 	}
 
 }

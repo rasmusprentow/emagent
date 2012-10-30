@@ -9,8 +9,8 @@ public class FirstPriceSealedBidOneShotBiddingStrategy implements
 		IBrpBiddingStrategy {
 
 	@Override
-	public void  bidOnAuctions(AuctionList auctions, int monetaryBalance,
-			int electricalBalance, IBrp bidder) throws Exception {
+	public void  bidOnAuctions(AuctionList auctions, long monetaryBalance,
+			long electricalBalance, IBrp bidder) throws Exception {
 		
 		for(IAuction auction : auctions)
 		{
@@ -35,14 +35,14 @@ public class FirstPriceSealedBidOneShotBiddingStrategy implements
 				{
 					continue;
 				}
-				int bidPrice = auction.getMinimumBidPrice();
-				int randPrice =  (int) (Math.random()* Environment.getEnvironment().getPriceDifference()) * auction.getQuantity() + bidPrice;
+				long bidPrice = auction.getMinimumBidPrice();
+				long randPrice =  (long) (Math.random()* Environment.getEnvironment().getPriceDifference()) * auction.getQuantity() + bidPrice;
 				
 				if(bidPrice/auction.getQuantity() <= privateValuation( - electricalBalance)/( - electricalBalance))
 				{
 					if(-electricalBalance >= auction.getQuantity())
 					{
-						int finalBidPrice = Math.min(monetaryBalance, randPrice);
+						long finalBidPrice = Math.min(monetaryBalance, randPrice);
 						monetaryBalance -= finalBidPrice;
 						electricalBalance += auction.getQuantity();
 						auction.addBid(new Bid( finalBidPrice,bidder ) );
@@ -52,7 +52,7 @@ public class FirstPriceSealedBidOneShotBiddingStrategy implements
 		}
 	}
 
-	private int privateValuation(int electricalBalance) {
+	private int privateValuation(long electricalBalance) {
 		return (int)(Environment.getEnvironment().getTso().getFineSize(electricalBalance) * 0.9);
 	}
 
