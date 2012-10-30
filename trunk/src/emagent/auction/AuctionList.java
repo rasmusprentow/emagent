@@ -16,7 +16,7 @@ public class AuctionList extends ArrayList<IAuction> {
 
 	public AuctionList sortByPrice(boolean ascending)
 	{
-		final int multiplyer = ascending ? 1 : -1;
+		final int multiplyer = ascending ? -1 : 1;
 		Collections.sort(this, new Comparator<IAuction>() {
 			@Override
 			public int compare(IAuction o1, IAuction o2) {
@@ -34,7 +34,7 @@ public class AuctionList extends ArrayList<IAuction> {
 	
 	public AuctionList sortByQuantity(boolean ascending)
 	{
-		final int multiplyer = ascending ? 1 : -1;
+		final int multiplyer = ascending ? -1 : 1;
 		Collections.sort(this, new Comparator<IAuction>() {
 			@Override
 			public int compare(IAuction o1, IAuction o2) {
@@ -51,7 +51,7 @@ public class AuctionList extends ArrayList<IAuction> {
 	
 	public AuctionList sortByPricePerQuantity(boolean ascending)
 	{
-		final int multiplyer = ascending ? 1 : -1;
+		final int multiplyer = ascending ? -1 : 1;
 		Collections.sort(this, new Comparator<IAuction>() {
 			@Override
 			public int compare(IAuction o1, IAuction o2) {

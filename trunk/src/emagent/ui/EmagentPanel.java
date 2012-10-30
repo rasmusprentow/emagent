@@ -221,11 +221,16 @@ public class EmagentPanel extends JPanel implements TickListener{
 	{
 		int total = 0;
 		int count = 0;
+		boolean found = false;
 		for(IAuction auction : Environment.getEnvironment().getMarket().getAuctionHistory())
 		{
 			if(auction instanceof NewRoundAuction)
 			{
-				break;
+				if(found)
+				{
+					break;
+				}
+				found = true;
 			}
 			else
 			{
