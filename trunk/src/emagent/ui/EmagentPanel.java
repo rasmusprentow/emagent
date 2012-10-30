@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -47,13 +48,15 @@ public class EmagentPanel extends JPanel implements TickListener{
 												TOTAL_MONETARY_STRING + "," +
 												TOTAL_IMBALANCE_STRING + "," +
 												TOTAL_CONSUMATION_STRING + "," +
-												AVERAGE_ENERGY_PRICE_STRING + "\n";
+												AVERAGE_ENERGY_PRICE_STRING;
+	private static final String CSV_FILE_NAME = "data.csv";
 	
 	private ArrayList<DrawableAgent> drawableAgents = null;
 	private int grandTotalConsumption = 0;
 	private DrawableMarket market;
 	
 	private FileWriter file;
+	private BufferedWriter out;
 	
 	private Label totalImbalanceLabel;
 	private Label averageEnergyPricelabel;
@@ -105,7 +108,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 		
 		
 		
-		timeLabel = new Label("Tick: XXXXXXXXXXXXXXX");
+		timeLabel = new Label("Day: 0 Hour: 0 slp: 500");
 		topPanel.add(timeLabel);
 		topPanel.setBackground(Color.black);
 		topPanel.setForeground(Color.yellow);
@@ -159,9 +162,9 @@ public class EmagentPanel extends JPanel implements TickListener{
 		btnPanel.add(guiDisBtn);
 		//Clear file
 		try {
-			file = new FileWriter("avg.csv",false);
-			file.write(CSV_HEADER);
-			file.close();
+			file = new FileWriter(CSV_FILE_NAME,false);
+			out = new BufferedWriter(file);
+			out.write(CSV_HEADER);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -178,7 +181,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 		grandTotalConsumption += total;
 		
 		try {
-			file.write("," + total);
+			out.write("," + total);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -198,7 +201,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 			total += Math.abs(brp.getCurrentElectricalBalance());
 		}
 		try {
-			file.write("," + total);
+			out.write("," + total);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -231,7 +234,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 		if(count > 0)
 		{
 			try {
-				file.write("," + total/count);
+				out.write("," + total/count);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -253,13 +256,13 @@ public class EmagentPanel extends JPanel implements TickListener{
 			total += (brp.getCurrentMonetaryBalance());
 		}
 		try {
-			file.write("," + total);
+			out.write("," + total);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		if(GuiDisListener.isDisabled())
 		{ return; }
-		totalMoneyLabel.setText(TOTAL_MONETARY_STRING + total + " ");
+		totalMoneyLabel.setText(TOTAL_MONETARY_STRING + total);
 		
 		
 	}
@@ -304,8 +307,7 @@ public class EmagentPanel extends JPanel implements TickListener{
 		
 	
 		try {
-			file = new FileWriter("avg.csv",true);
-			file.write(Environment.getEnvironment().getTime() + "");
+			out.write("\n" + Environment.getEnvironment().getTime());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -316,22 +318,26 @@ public class EmagentPanel extends JPanel implements TickListener{
 		updateAverageEnergyPrice();
 		if(GuiDisListener.isDisabled())
 		{
-			timeLabel.setText("Day: " + time/24 + " Hour: 0 slp: " + Environment.getEnvironment().getSleepTime());
-
-			return ;
+			if(time % 24 == 0)
+			{
+				timeLabel.setText("Day: " + time/24 + " Hour: 0 slp: " + Environment.getEnvironment().getSleepTime());
+			}
 		}
-		timeLabel.setText("Day: " + time/24 + " Hour: " + time % 24 + " slp: " + Environment.getEnvironment().getSleepTime());
-
-		try {
-			file.write("\n");
-			file.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+		else
+		{
+			timeLabel.setText("Day: " + time/24 + " Hour: " + time % 24 + " slp: " + Environment.getEnvironment().getSleepTime());
 		}
 
 		while(pauseListener.isPaused()) Thread.sleep(10);
 		
 	}
 
-
+	protected void finalize() throws Throwable
+	{
+		out.flush();
+		out.close();
+		file.flush();
+		file.close();
+		super.finalize();
+	} 
 }
