@@ -37,6 +37,7 @@ public class DrawableBrp extends DrawableAgent {
 
 	@Override
 	public void update() {
+	
 		if(GuiDisListener.isDisabled())
 		{
 			return ;
