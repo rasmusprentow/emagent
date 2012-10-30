@@ -11,4 +11,8 @@ public interface IProsumer extends IAgent{
 	long getTotalConsumption();
 	
 	long payElectricalBill();
+
+	void setName(String name);
+
+	public String getName();
 }

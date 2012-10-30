@@ -6,6 +6,16 @@ import emagent.environment.Environment;
 abstract public class AbstractProsumer extends AbstractAgent implements IProsumer {
 	
 
+	private String name; 
+	
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public long payElectricalBill()
 	{
