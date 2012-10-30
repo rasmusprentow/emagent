@@ -10,6 +10,8 @@ import emagent.environment.IEnvironment;
 public class TimeListener implements ActionListener {
 
 	private IEnvironment environment;
+	private JButton plusBtn;
+	private JButton minusBtn;
 	public TimeListener (IEnvironment env)
 	{
 		environment = env;
@@ -21,20 +23,33 @@ public class TimeListener implements ActionListener {
 	
 		if(btn.getText() == "-")
 		{
+			minusBtn = btn;
+			
 			if(environment.getSleepTime() == 0)
 			{
+				plusBtn.setEnabled(true);
 				environment.setSleepTime(1);
-			} else if(environment.getSleepTime() >= 2000)
+			
+			} else if(environment.getSleepTime() < 2000)
 			{
+				environment.setSleepTime(environment.getSleepTime()*2);
 				
 			}else {
-				environment.setSleepTime(environment.getSleepTime()*2);
+				btn.setEnabled(false);
 			}
 		} else if(btn.getText() == "+")
 		{
-			
-			
-			environment.setSleepTime(environment.getSleepTime()/2);
+			long sleepTime = environment.getSleepTime();
+			plusBtn = btn;
+			environment.setSleepTime(sleepTime/2);
+			if(environment.getSleepTime() == 0)
+			{
+				
+				btn.setEnabled(false);
+			} else if (sleepTime >= 2000)
+			{
+				minusBtn.setEnabled(true);
+			}
 		}
 	}
 
