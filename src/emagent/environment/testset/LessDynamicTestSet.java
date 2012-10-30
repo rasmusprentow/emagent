@@ -24,6 +24,7 @@ public class LessDynamicTestSet extends AbstractTestSet {
 		IBrp brpf = createBrp("F",env.getStandardConsumationElectricityPrice()*15000);
 		IBrp brpg = createBrp("G",env.getStandardConsumationElectricityPrice()*15000);
 		IBrp brph = createBrp("H",env.getStandardConsumationElectricityPrice()*15000);
+		IBrp brpi = createBrp("I",env.getStandardConsumationElectricityPrice()*15000);
 		
 		
 		IProsumer powerplant100 = new ConstantProsumer(-100);
@@ -38,7 +39,7 @@ public class LessDynamicTestSet extends AbstractTestSet {
 		IProsumer powerplant150 = new ConstantProsumer(-150);
 		IProsumer village2 = new SinusProsumer(50, 0, 25);
 		IProsumer windmill = new VariableProsumer(new I2IFunction(){
-
+		
 			@Override
 			public long map(long arg) {
 				return - (long) (Math.random()*50 + 25);
@@ -47,6 +48,8 @@ public class LessDynamicTestSet extends AbstractTestSet {
 			
 		});
 		
+		IProsumer village3 = new ConstantProsumer(100);
+		IProsumer city2 = new ConstantProsumer(200);
 		IProsumer nuclear = new VariableProsumer(new I2IFunction(){
 
 			@Override
@@ -78,6 +81,8 @@ public class LessDynamicTestSet extends AbstractTestSet {
 		prosumers.add(village2);
 		prosumers.add(windmill);
 		prosumers.add(nuclear);
+		prosumers.add(city2);
+		prosumers.add(village3);
 		
 		brpa.addProsumer(powerplant100);
 		brpa.addProsumer(house);
@@ -97,7 +102,9 @@ public class LessDynamicTestSet extends AbstractTestSet {
 		brpg.addProsumer(windmill);
 		
 		brph.addProsumer(nuclear);
+		brph.addProsumer(city2);
 		
+		brpi.addProsumer(village3);
 	}
 
 }
