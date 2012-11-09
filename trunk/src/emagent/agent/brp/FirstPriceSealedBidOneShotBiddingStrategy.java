@@ -8,6 +8,8 @@ import emagent.environment.Environment;
 public class FirstPriceSealedBidOneShotBiddingStrategy implements
 		IBrpBiddingStrategy {
 
+	private double privateValueModifyer = 0.99;
+	
 	@Override
 	public void  bidOnAuctions(AuctionList auctions, long monetaryBalance,
 			long electricalBalance, IBrp bidder) throws Exception {
@@ -36,14 +38,15 @@ public class FirstPriceSealedBidOneShotBiddingStrategy implements
 				}
 				long bidPrice = auction.getMinimumBidPrice();
 				long randPrice =  (long) (Math.random()* Environment.getEnvironment().getPriceDifference()) * auction.getQuantity() + bidPrice;
+				long finalBidPrice = Math.min(monetaryBalance, randPrice);
 				
-				if(bidPrice/auction.getQuantity() <= privateValuation( - electricalBalance)/( - electricalBalance))
+				if(finalBidPrice/auction.getQuantity() <= privateValuation( - electricalBalance)/( - electricalBalance))
 				{
 					if(-electricalBalance >= auction.getQuantity())
 					{
-						long finalBidPrice = Math.min(monetaryBalance, randPrice);
-						monetaryBalance -= finalBidPrice;
-						electricalBalance += auction.getQuantity();
+						
+						monetaryBalance -= finalBidPrice; 
+						electricalBalance += auction.getQuantity(); 
 						auction.addBid(new Bid( finalBidPrice,bidder ) );
 					}
 				}
@@ -52,7 +55,7 @@ public class FirstPriceSealedBidOneShotBiddingStrategy implements
 	}
 
 	private int privateValuation(long electricalBalance) {
-		return (int)(Environment.getEnvironment().getTso().getFineSize(electricalBalance) * 0.9);
+		return (int)(Environment.getEnvironment().getTso().getFineSize(electricalBalance) * privateValueModifyer);
 	}
 
 }
