@@ -3,10 +3,17 @@ package emagent.agent;
 
 
 import java.util.ArrayList;
-import emagent.agent.brp.*;
-import java.util.Collections;
 import java.util.Collection;
-import emagent.auction.*;
+import java.util.Collections;
+
+import emagent.agent.brp.IBrp;
+import emagent.auction.AuctionList;
+import emagent.auction.AuctionLog;
+import emagent.auction.AuctionStatus;
+import emagent.auction.AuctionType;
+import emagent.auction.IAuction;
+import emagent.auction.IAuctionResult;
+import emagent.auction.NotSoldResult;
 import emagent.environment.Environment;
 
 public abstract class Market extends AbstractAgent implements IMarket {

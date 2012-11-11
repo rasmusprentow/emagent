@@ -1,7 +1,8 @@
 package emagent.auction;
 
 import java.util.Stack;
-import emagent.agent.brp.*;
+
+import emagent.agent.brp.IBrp;
 
 
 public abstract class Auction implements IAuction{

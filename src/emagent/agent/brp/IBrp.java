@@ -2,9 +2,13 @@ package emagent.agent.brp;
 
 import java.util.Collection;
 import java.util.EventListener;
-import emagent.agent.*;
+
+import emagent.agent.IAgent;
 import emagent.agent.prosumer.IProsumer;
-import emagent.auction.*;
+import emagent.auction.AuctionList;
+import emagent.auction.AuctionType;
+import emagent.auction.IAuction;
+import emagent.auction.IAuctionResult;
 import emagent.environment.IFine;
 
 public interface IBrp extends IAgent, EventListener {

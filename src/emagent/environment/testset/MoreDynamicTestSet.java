@@ -1,11 +1,12 @@
 package emagent.environment.testset;
-import emagent.agent.*;
+import emagent.agent.FirstPriceOpenCryAscendingMarket;
+import emagent.agent.I2IFunction;
+import emagent.agent.Tso;
 import emagent.agent.brp.IBrp;
 import emagent.agent.prosumer.ConstantProsumer;
 import emagent.agent.prosumer.IProsumer;
 import emagent.agent.prosumer.SinusProsumer;
 import emagent.agent.prosumer.VariableProsumer;
-
 import emagent.environment.IEnvironment;
 
 public class MoreDynamicTestSet extends AbstractTestSet {

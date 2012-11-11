@@ -4,17 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.util.ArrayList;
 
-
 import javax.swing.JPanel;
 
-
 import emagent.agent.IMarket;
-import emagent.auction.*;
+import emagent.auction.AuctionLog;
+import emagent.auction.IAuction;
+import emagent.auction.NewRoundAuction;
 import emagent.ui.listeners.GuiDisListener;
 
 public class DrawableMarket extends DrawableAgent {

@@ -3,10 +3,10 @@ package emagent.environment;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import emagent.agent.brp.*;
-import emagent.agent.prosumer.IProsumer;
 import emagent.agent.IMarket;
 import emagent.agent.ITso;
+import emagent.agent.brp.IBrp;
+import emagent.agent.prosumer.IProsumer;
 import emagent.ui.TickListener;
 
 public interface IEnvironment {

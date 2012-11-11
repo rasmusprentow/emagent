@@ -3,10 +3,12 @@ package emagent.environment;
 
 import java.util.ArrayList;
 
-import emagent.agent.brp.*;
+import emagent.agent.IMarket;
+import emagent.agent.ITso;
+import emagent.agent.brp.IBrp;
 import emagent.agent.prosumer.IProsumer;
-import emagent.agent.*;
-import emagent.environment.testset.*;
+import emagent.environment.testset.ITestSet;
+import emagent.environment.testset.LessDynamicTestSet;
 import emagent.ui.TickListener;
 
 public class Environment implements IEnvironment {

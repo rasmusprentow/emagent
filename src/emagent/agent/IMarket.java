@@ -1,8 +1,8 @@
 package emagent.agent;
 
 import java.util.Collection;
-import emagent.agent.brp.*;
 
+import emagent.agent.brp.IBrp;
 import emagent.auction.AuctionLog;
 
 

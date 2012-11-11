@@ -4,7 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
-import emagent.agent.brp.*;
+
+import emagent.agent.brp.IBrp;
 import emagent.ui.listeners.GuiDisListener;
 
 public class DrawableBrp extends DrawableAgent {
