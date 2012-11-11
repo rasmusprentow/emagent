@@ -2,7 +2,8 @@ package emagent.environment.testset;
 
 import java.util.ArrayList;
 
-import emagent.agent.*;
+import emagent.agent.IMarket;
+import emagent.agent.ITso;
 import emagent.agent.brp.IBrp;
 import emagent.agent.prosumer.IProsumer;
 import emagent.environment.IEnvironment;

@@ -2,7 +2,7 @@ package emagent.auction;
 
 
 
-import emagent.agent.brp.*;
+import emagent.agent.brp.IBrp;
 
 public class FirstPriceSealedBidOneShotAuction extends FirstPriceAbstractAuction {
 

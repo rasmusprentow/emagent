@@ -4,9 +4,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-import emagent.agent.*;
+import emagent.agent.AbstractAgent;
 import emagent.agent.prosumer.IProsumer;
-import emagent.auction.*;
+import emagent.auction.AuctionList;
+import emagent.auction.AuctionType;
+import emagent.auction.BidOrder;
+import emagent.auction.BidPrice;
+import emagent.auction.BidType;
+import emagent.auction.IAuction;
+import emagent.auction.IAuctionFactory;
+import emagent.auction.IAuctionResult;
+import emagent.auction.NotSoldResult;
 import emagent.environment.IFine;
 
 

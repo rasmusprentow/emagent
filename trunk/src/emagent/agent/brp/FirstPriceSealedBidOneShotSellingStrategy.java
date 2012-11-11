@@ -1,6 +1,8 @@
 package emagent.agent.brp;
 
-import emagent.auction.*;
+import emagent.auction.AuctionFactory;
+import emagent.auction.AuctionList;
+import emagent.auction.AuctionType;
 import emagent.environment.Environment;
 
 public class FirstPriceSealedBidOneShotSellingStrategy implements
