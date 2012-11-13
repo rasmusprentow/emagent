@@ -8,7 +8,7 @@ import emagent.environment.Environment;
 public class FirstPriceSealedBidOneShotBiddingStrategy implements
 		IBrpBiddingStrategy {
 
-	private double privateValueModifyer = 0.99;
+	private double privateValueModifyer = 0.8;
 	
 	@Override
 	public void  bidOnAuctions(AuctionList auctions, long monetaryBalance,
