@@ -10,19 +10,19 @@ public class FirstPriceSealedBidOneShotSellingStrategy implements
 
 	@Override
 	public AuctionList postAuctions(long energyBalance, AuctionType auctionType, IBrp seller) {
-		AuctionList res = new AuctionList();
+		AuctionList auctions = new AuctionList();
 		
 		while(energyBalance > 0)
 		{
-			long curBid = Math.min(energyBalance/3+1,energyBalance);
-			res.add(AuctionFactory.getFactory().create(
+			long electricalQuantity = Math.min(energyBalance/3+1,energyBalance);
+			auctions.add(AuctionFactory.getFactory().create(
 					auctionType, 
-					curBid, 
-					curBid*Environment.getEnvironment().getStandardProductionElectricityPrice()+1, 
+					electricalQuantity, 
+					electricalQuantity*Environment.getEnvironment().getStandardProductionElectricityPrice()+1, 
 					seller));
-			energyBalance -= curBid;
+			energyBalance -= electricalQuantity;
 		}
-		return res;
+		return auctions;
 	}
 
 }
